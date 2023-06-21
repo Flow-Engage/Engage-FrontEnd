@@ -1,3 +1,5 @@
+import Head from '@/components/Head';
+import SideBar from '@/components/SideBar';
 import { useSession, signIn, signOut } from 'next-auth/react';
 export default function IndexPage() {
   const { data, status } = useSession();
@@ -5,9 +7,9 @@ export default function IndexPage() {
   if (status === 'authenticated') {
     return (
       <div>
-        <h1> hi {data.user.name}</h1>
-        <img src={data.user.image} alt={data.user.name + ' photo'} />
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={signOut}>sign out</button>
+        <Head name={data.user.name} img={data.user.image} signOut={signOut}/>
+         <SideBar/>
+       
       </div>
     );
   }
