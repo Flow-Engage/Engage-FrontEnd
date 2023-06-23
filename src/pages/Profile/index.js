@@ -33,7 +33,7 @@ export default function IndexPage() {
                 <div className="flex  flex-col w-72 items-center justify-start  ">
                   <img
                     className="h-10 w-10 rounded-full mr-4 "
-                    src={(require = "./assets/images/nft1.png")}
+                    src={data.user.image}
                   />
                   Hemang Vora
                   <br />
@@ -104,8 +104,8 @@ export default function IndexPage() {
                 </div>
                 <div className="flex  flex-row mt-10 items-center justify-center mb-5 ">
                   <img
-                    className="h-20 w-20 rounded-full mr-4 "
-                    src={(require = "./assets/images/nft1.png")}
+                    className="h-25 w-25 rounded-full mr-4 "
+                    src={data.user.image}
                   />
                 </div>
                 <div className="rounded bg-white h-auto p-5  dark:bg-gray-800">
