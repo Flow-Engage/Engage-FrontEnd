@@ -12,415 +12,156 @@ export default function IndexPage() {
         <div className="p-4 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="text-2xl text-[#333333] font-dmsans font-semibold">
-              Featured
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.375 5.25L8.625 12L15.375 18.75"
+                  stroke="#00040A"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
-            <div className="grid grid-cols-4 gap-4 mb-4">
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
+            <div className="grid grid-cols-4 gap-4 ">
+              <div className="grid grid-cols-1 rounded h-auto p-3 col-span-1 dark:bg-gray-800">
+                <div className="flex  flex-col w-72 items-center justify-start  ">
                   <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="text-2xl text-[#333333] font-dmsans font-semibold">
-              My Portfolio
-            </div>
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="flex items-center justify-evenly h-32 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
-                  <img
-                    className="h-20 w-20 rounded-2xl"
+                    className="h-10 w-10 rounded-full mr-4 "
                     src={(require = "./assets/images/nft1.png")}
-                    alt=""
                   />
-                </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  JON Vs Hmg <br />
-                  Baseball
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                    +27.4%
+                  Hemang Vora
+                  <br />
+                  @HemangVora
+                  <div className="flex  flex-row w-72 items-center justify-center mt-20 ">
+                  <div className="w-48 text-gray-900 border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <button
+                      type="button"
+                      className="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 rounded-t-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="w-4 h-4 mr-2 fill-current"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Profile
+                    </button>
+                    <button
+                      type="button"
+                      className="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="w-4 h-4 mr-2 fill-current"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                      </svg>
+                      Settings
+                    </button>
+                    <button
+                      type="button"
+                      className="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="w-4 h-4 mr-2 fill-current"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Logout
+                    </button>
                   </div>
                 </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Market Gap <br />
-                  $530,450
                 </div>
+                
               </div>
-              <div className="flex items-center justify-evenly h-32 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
-                  <img
-                    className="h-20 w-20 rounded-2xl"
-                    src={(require = "./assets/images/nft2.png")}
-                    alt=""
-                  />
-                </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  JON Vs Hmg <br />
-                  Baseball
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                    +27.4%
-                  </div>
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Market Gap <br />
-                  $530,450
-                </div>
-              </div>
-              <div className="flex items-center justify-evenly h-32 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
-                  <img
-                    className="h-20 w-20 rounded-2xl"
-                    src={(require = "./assets/images/nft2.png")}
-                    alt=""
-                  />
-                </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  JON Vs Hmg <br />
-                  Baseball
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                    +27.4%
-                  </div>
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Market Gap <br />
-                  $530,450
-                </div>
-              </div>
-            </div>
-            <div className="text-2xl text-[#333333] font-dmsans font-semibold">
-              Top Movers
-            </div>
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="grid grid-cols-2 rounded bg-white h-auto p-3 col-span-2 dark:bg-gray-800">
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
-                    <img
-                      className="h-[110px] w-[190px] rounded-md "
-                      src={(require = "./assets/images/nft1.png")}
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg Baseball <br />
-                    $0.0000007
-                  </div>
-                  <div className="text-[#000] font-dmsans">
-                    <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Add to watchlist
-                    </button>
-                    <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
-                      Buy
-                    </button>
-                  </div>
-                </div>
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
-                    <img
-                      className="h-[110px] w-[190px] rounded-md "
-                      src={(require = "./assets/images/nft2.png")}
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg Baseball <br />
-                    $0.0000007
-                  </div>
-                  <div className="text-[#000] font-dmsans">
-                    <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Add to watchlist
-                    </button>
-                    <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
-                      Buy
-                    </button>
-                  </div>
-                </div>
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
-                    <img
-                      className="h-[110px] w-[190px] rounded-md "
-                      src={(require = "./assets/images/nft1.png")}
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg Baseball <br />
-                    $0.0000007
-                  </div>
-                  <div className="text-[#000] font-dmsans">
-                    <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Add to watchlist
-                    </button>
-                    <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
-                      Buy
-                    </button>
-                  </div>
-                </div>
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
-                    <img
-                      className="h-[110px] w-[190px] rounded-md "
-                      src={(require = "./assets/images/nft2.png")}
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg Baseball <br />
-                    $0.0000007
-                  </div>
-                  <div className="text-[#000] font-dmsans">
-                    <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Add to watchlist
-                    </button>
-                    <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
-                      Buy
-                    </button>
-                  </div>
-                </div>
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
-                    <img
-                      className="h-[110px] w-[190px] rounded-md "
-                      src={(require = "./assets/images/nft1.png")}
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg Baseball <br />
-                    $0.0000007
-                  </div>
-                  <div className="text-[#000] font-dmsans">
-                    <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Add to watchlist
-                    </button>
-                    <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
-                      Buy
-                    </button>
-                  </div>
-                </div>
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
-                    <img
-                      className="h-[110px] w-[190px] rounded-md "
-                      src={(require = "./assets/images/nft2.png")}
-                      alt=""
-                    />
-                  </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg Baseball <br />
-                    $0.0000007
-                  </div>
-                  <div className="text-[#000] font-dmsans">
-                    <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Add to watchlist
-                    </button>
-                    <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
-                      Buy
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
+              <div className="grid rounded h-auto p-3 col-span-3 dark:bg-gray-800">
                 <div className="text-2xl text-[#333333] font-dmsans font-semibold">
-                  My Wishlist
+                  Account Information
                 </div>
-                <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                  <li className="pb-3 sm:pb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
+                <div className="flex  flex-row mt-10 items-center justify-center mb-5 ">
+                  <img
+                    className="h-20 w-20 rounded-full mr-4 "
+                    src={(require = "./assets/images/nft1.png")}
+                  />
+                </div>
+                <div className="rounded bg-white h-auto p-5  dark:bg-gray-800">
+                  <div className="text-2xl text-[#333333] font-dmsans font-semibold">
+                    Personal Information
+                  </div>
+                  <div className="w-50 flex flex-col justify-between h-full">
+                    <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-5 font-dmsans">
+                      <div className="text-xl text-[#333333]  font-dmsans font-normal">
+                        Name
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Neil Sims
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
+                      <div className="text-xl text-[#333333]  font-dmsans font-thin">
+                        Hemang Vora
                       </div>
                     </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
+                    <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-5 font-dmsans">
+                      <div className="text-xl text-[#333333]  font-dmsans font-normal">
+                        UserName
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Bonnie Green
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
+                      <div className="text-xl text-[#333333]  font-dmsans font-thin">
+                        @HemangVora
                       </div>
                     </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
+                  </div>
+                </div>
+                <div className="rounded bg-white h-auto p-5 my-5 dark:bg-gray-800">
+                  <div className="text-2xl text-[#333333] font-dmsans font-semibold">
+                    Contact Information
+                  </div>
+                  <div className="w-50 flex flex-col justify-between h-full">
+                    <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-5 font-dmsans">
+                      <div className="text-xl text-[#333333]  font-dmsans font-normal">
+                        Email
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Michael Gough
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $67
+                      <div className="text-xl text-[#333333]  font-dmsans font-thin">
+                        hemangvora2@gmail.com
                       </div>
                     </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
+                    <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-5 font-dmsans">
+                      <div className="text-xl text-[#333333]  font-dmsans font-normal">
+                        PhoneNo
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Thomas Lean
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $2367
+                      <div className="text-xl text-[#333333]  font-dmsans font-thin">
+                        +9183484483838
                       </div>
                     </div>
-                  </li>
-                  <li className="pt-3 pb-0 sm:pt-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
+                    <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-5 font-dmsans">
+                      <div className="text-xl text-[#333333]  font-dmsans font-normal">
+                        Wallet Address
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Lana Byrd
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $367
+                      <div className="text-xl text-[#333333]  font-dmsans font-thin">
+                        0x1212221213
                       </div>
                     </div>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -431,7 +172,7 @@ export default function IndexPage() {
   return (
     <div>
       <button
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        className=" text-white font-bold py-2 px-4 rounded"
         onClick={() => signIn("google")}
       >
         sign in with gooogle
