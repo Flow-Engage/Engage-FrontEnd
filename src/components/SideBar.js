@@ -27,7 +27,7 @@ export default function SideBar() {
                   style={{
                     backgroundImage: `url(${bg.src})`,
                     width: "224px",
-                    height: "78px",
+                    height: "81px",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                   }}
