@@ -1,19 +1,14 @@
 export default function Head({name,img,signOut}) {
   return (
     <>
-      <header className="bg-[#FFFFFF]">
+      <header className="bg-[#FFFFFF] w-screen pl-44 ">
         <nav
           className=" flex mx-10 items-center justify-between ite p-6 lg:px-8"
           aria-label="Global"
         >
           <div className="flex lg:flex-1 items-center items-center  ">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src={(require = "./assets/images/logo.png")}
-                alt=""
-              />
+              
             </a>
 
             <form className="flex items-center items-center w-1/3 ml-6">
