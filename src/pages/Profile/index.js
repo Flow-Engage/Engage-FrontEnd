@@ -31,13 +31,13 @@ export default function IndexPage() {
             <div className="grid grid-cols-4 gap-4 ">
               <div className="grid grid-cols-1 rounded h-auto p-3 col-span-1 dark:bg-gray-800">
                 <div className="flex  flex-col w-72 items-center justify-start  ">
-                  <img
+                  {/* <img
                     className="h-10 w-10 rounded-full mr-4 "
                     src={data.user.image}
                   />
                   Hemang Vora
                   <br />
-                  @HemangVora
+                  @HemangVora */}
                   <div className="flex  flex-row w-72 items-center justify-center mt-20 ">
                   <div className="w-48 text-gray-900 border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <button
