@@ -1,8 +1,10 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from 'next/router';
 export default function IndexPage() {
   const { data, status } = useSession();
+  
   if (status === "loading") return <h1> loading... please wait</h1>;
   if (status === "authenticated") {
     return (
@@ -11,7 +13,7 @@ export default function IndexPage() {
         <SideBar />
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-            <div className="text-2xl text-[#333333] font-dmsans font-semibold">
+            <div className="text-xl text-[#333333] font-dmsans font-semibold">
               Featured
             </div>
             <div className="grid grid-cols-4 gap-4 mb-4">
@@ -92,14 +94,14 @@ export default function IndexPage() {
                 </div>
               </div>
             </div>
-            <div className="text-2xl text-[#333333] font-dmsans font-semibold">
+            <div className="text-xl text-[#333333] font-dmsans font-semibold">
               My Portfolio
             </div>
             <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="flex items-center justify-evenly h-32 rounded bg-white dark:bg-gray-800">
+              <div className="flex items-center justify-evenly h-18 p-5 rounded bg-white dark:bg-gray-800">
                 <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
                   <img
-                    className="h-20 w-20 rounded-2xl"
+                    className="h-12 w-12 rounded-2xl"
                     src={(require = "./assets/images/nft1.png")}
                     alt=""
                   />
@@ -121,10 +123,10 @@ export default function IndexPage() {
                   $530,450
                 </div>
               </div>
-              <div className="flex items-center justify-evenly h-32 rounded bg-white dark:bg-gray-800">
+              <div className="flex items-center justify-evenly h-18 rounded bg-white dark:bg-gray-800">
                 <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
                   <img
-                    className="h-20 w-20 rounded-2xl"
+                    className="h-12 w-12 rounded-2xl"
                     src={(require = "./assets/images/nft2.png")}
                     alt=""
                   />
@@ -146,10 +148,10 @@ export default function IndexPage() {
                   $530,450
                 </div>
               </div>
-              <div className="flex items-center justify-evenly h-32 rounded bg-white dark:bg-gray-800">
+              <div className="flex items-center justify-evenly h-18 rounded bg-white dark:bg-gray-800">
                 <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
                   <img
-                    className="h-20 w-20 rounded-2xl"
+                    className="h-12 w-12 rounded-2xl"
                     src={(require = "./assets/images/nft2.png")}
                     alt=""
                   />
@@ -172,12 +174,13 @@ export default function IndexPage() {
                 </div>
               </div>
             </div>
-            <div className="text-2xl text-[#333333] font-dmsans font-semibold">
-              Top Movers
-            </div>
+
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div className="grid grid-cols-2 rounded bg-white h-auto p-3 col-span-2 dark:bg-gray-800">
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
+                <div className="text-xl absolute text-[#333333] font-dmsans font-semibold">
+                  Top Movers
+                </div>
+                <div className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
                   <div className="text-[#FFFFFF] font-dmsans ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
@@ -198,7 +201,7 @@ export default function IndexPage() {
                     </button>
                   </div>
                 </div>
-                <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
+                <div className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
                   <div className="text-[#FFFFFF] font-dmsans ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
@@ -306,7 +309,7 @@ export default function IndexPage() {
               </div>
 
               <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
-                <div className="text-2xl text-[#333333] font-dmsans font-semibold">
+                <div className="text-xl text-[#333333] font-dmsans font-semibold">
                   My Wishlist
                 </div>
                 <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">

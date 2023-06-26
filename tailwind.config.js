@@ -18,7 +18,7 @@ module.exports = {
     },
     fontFamily: {
 
-      'dnsans': ['"DM Sans"'] // Ensure fonts with spaces have " " surrounding it.
+      'dmsans': ['"DM Sans"'] // Ensure fonts with spaces have " " surrounding it.
     },
   },
   plugins: [require('flowbite/plugin')],
