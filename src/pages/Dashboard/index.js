@@ -9,7 +9,7 @@ export default function IndexPage() {
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
         <SideBar />
-        <div className="p-4 sm:ml-64 ">
+        <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="text-2xl text-[#333333] font-dmsans font-semibold">
               Featured

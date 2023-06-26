@@ -5,13 +5,13 @@ export default function SideBar() {
     <>
       <aside
         id="sidebar-multi-level-sidebar"
-        className="font-dmsans fixed top-0 left-0 ml-5 w-64 h-screen"
+        className="font-dmsans fixed top-0 left-0 ml-2 w-64 h-screen"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-white-50 mb-10 dark:bg-white-800">
-          <div className="space-y-2  font-medium p-2 mb-5">
+          <div className=" font-medium pl-3  mb-5">
             <img
-              className="h-12  w-auto "
+              className="h-12 flex flex-row justify-center items-center w-auto "
               src={(require = "./assets/images/logo.png")}
               alt=""
             />
@@ -238,7 +238,6 @@ export default function SideBar() {
           </ul>
         </div>
       </aside>
-      
     </>
   );
 }
