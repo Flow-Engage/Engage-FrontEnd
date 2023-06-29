@@ -12,7 +12,7 @@ export default function SideBar() {
           <div className=" font-medium pl-3  mb-5">
             <img
               className="h-12 flex flex-row justify-center items-center w-auto "
-              src={(require = "./assets/images/logo.png")}
+              src="/assets/images/logo.png"
               alt=""
             />
           </div>
