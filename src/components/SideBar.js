@@ -1,6 +1,9 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import bg from "public/assets/images/card_bg.png";
 
 export default function SideBar() {
+  const router = useRouter()
   return (
     <>
       <aside
@@ -18,7 +21,7 @@ export default function SideBar() {
           </div>
           <ul className="space-y-2 font-medium">
             <li className="mb-10">
-              <a
+              <Link
                 href="#"
                 className="flex items-center p-2 text-black rounded-lg  hover:bg-white-100 dark:hover:bg-white-700"
               >
@@ -60,11 +63,11 @@ export default function SideBar() {
                     <div></div>
                   </div>
                 </div>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/Dashboard"
                 className="flex items-center p-2 text-black rounded-lg  hover:bg-white-100 dark:hover:bg-white-700"
               >
                 <svg
@@ -83,34 +86,13 @@ export default function SideBar() {
                 <span className="ml-3 text-[#0654D6] font-dmsans">
                   Dashboard
                 </span>
-              </a>
+              </Link>
             </li>
 
-            <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-black rounded-lg  hover:bg-white-100 dark:hover:bg-white-700"
-              >
-                <svg
-                  width="24"
-                  height="25"
-                  viewBox="0 0 24 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4.875 23.75H3.375C3.07663 23.75 2.79048 23.6315 2.5795 23.4205C2.36853 23.2095 2.25 22.9234 2.25 22.625V15.875C2.25 15.5766 2.36853 15.2905 2.5795 15.0795C2.79048 14.8685 3.07663 14.75 3.375 14.75H4.875C5.17337 14.75 5.45952 14.8685 5.6705 15.0795C5.88147 15.2905 6 15.5766 6 15.875V22.625C6 22.9234 5.88147 23.2095 5.6705 23.4205C5.45952 23.6315 5.17337 23.75 4.875 23.75ZM15.375 23.75H13.875C13.5766 23.75 13.2905 23.6315 13.0795 23.4205C12.8685 23.2095 12.75 22.9234 12.75 22.625V11.375C12.75 11.0766 12.8685 10.7905 13.0795 10.5795C13.2905 10.3685 13.5766 10.25 13.875 10.25H15.375C15.6734 10.25 15.9595 10.3685 16.1705 10.5795C16.3815 10.7905 16.5 11.0766 16.5 11.375V22.625C16.5 22.9234 16.3815 23.2095 16.1705 23.4205C15.9595 23.6315 15.6734 23.75 15.375 23.75ZM20.625 23.75H19.125C18.8266 23.75 18.5405 23.6315 18.3295 23.4205C18.1185 23.2095 18 22.9234 18 22.625V6.125C18 5.82663 18.1185 5.54048 18.3295 5.3295C18.5405 5.11853 18.8266 5 19.125 5H20.625C20.9234 5 21.2095 5.11853 21.4205 5.3295C21.6315 5.54048 21.75 5.82663 21.75 6.125V22.625C21.75 22.9234 21.6315 23.2095 21.4205 23.4205C21.2095 23.6315 20.9234 23.75 20.625 23.75ZM10.125 23.75H8.625C8.32663 23.75 8.04048 23.6315 7.8295 23.4205C7.61853 23.2095 7.5 22.9234 7.5 22.625V2.375C7.5 2.07663 7.61853 1.79048 7.8295 1.5795C8.04048 1.36853 8.32663 1.25 8.625 1.25H10.125C10.4234 1.25 10.7095 1.36853 10.9205 1.5795C11.1315 1.79048 11.25 2.07663 11.25 2.375V22.625C11.25 22.9234 11.1315 23.2095 10.9205 23.4205C10.7095 23.6315 10.4234 23.75 10.125 23.75Z"
-                    fill="#333333"
-                  />
-                </svg>
-
-                <span className="flex-1 ml-3 whitespace-nowrap">
-                  Marketplace
-                </span>
-              </a>
-            </li>
+           
             <li>
               <button
+                onClick={()=>router.push("/MarketPlace")}
                 type="button"
                 className="flex items-center w-full p-2 text-[#333333]  "
                 aria-controls="dropdown-example"
@@ -133,7 +115,7 @@ export default function SideBar() {
                   className="flex-1 ml-3 text-left whitespace-nowrap"
                   sidebar-toggle-item
                 >
-                  E-commerce
+                  Marketplace
                 </span>
                 <svg
                   sidebar-toggle-item
@@ -151,42 +133,42 @@ export default function SideBar() {
               </button>
               <ul id="dropdown-example" className=" py-2 space-y-2">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/MarketPlace"
                     className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     All marketplaces
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/MarketPlace/Soccer"
                     className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     Soccer
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/MarketPlace/Base Ball"
                     className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     Base Ball
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/MarketPlace/Basket Ball"
                     className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     Basket Ball
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/Wallet"
                 className="flex items-center p-2 text-black rounded-lg  hover:bg-white-100 dark:hover:bg-white-700"
               >
                 <svg
@@ -203,10 +185,10 @@ export default function SideBar() {
                 </svg>
 
                 <span className="flex-1 ml-3 whitespace-nowrap">Wallet</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center p-2 text-black rounded-lg  hover:bg-white-100 dark:hover:bg-white-700"
               >
@@ -233,7 +215,7 @@ export default function SideBar() {
                 <span className="flex-1 ml-3 whitespace-nowrap">
                   Join our Discord
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
