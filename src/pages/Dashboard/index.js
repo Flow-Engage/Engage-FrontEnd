@@ -13,22 +13,22 @@ export default function IndexPage() {
         <SideBar />
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-            <div className="text-xl text-[#333333] font-dmsans font-semibold">
+            <div className="text-xl text-[#333333]  font-semibold">
               Featured
             </div>
             <div className="grid grid-cols-4 gap-4 mb-4">
               <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
                 <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] text-[13px] font-medium m-5 ">
                     JON Vs Hmg
                   </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
+                  <div className="text-[#000]  m-5 justify-center items-center flex">
                     <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Visit
                     </button>
                   </div>
                 </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
+                <div className="text-[#FFFFFF]  mt-3">
                   <img
                     className="h-auto w-auto "
                     src={(require = "./assets/images/featured.png")}
@@ -38,16 +38,16 @@ export default function IndexPage() {
               </div>
               <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
                 <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] text-[13px] font-medium m-5 ">
                     JON Vs Hmg
                   </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
+                  <div className="text-[#000]  m-5 justify-center items-center flex">
                     <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Visit
                     </button>
                   </div>
                 </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
+                <div className="text-[#FFFFFF]  mt-3">
                   <img
                     className="h-auto w-auto "
                     src={(require = "./assets/images/featured.png")}
@@ -57,16 +57,16 @@ export default function IndexPage() {
               </div>
               <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
                 <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] text-[13px] font-medium m-5 ">
                     JON Vs Hmg
                   </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
+                  <div className="text-[#000]  m-5 justify-center items-center flex">
                     <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Visit
                     </button>
                   </div>
                 </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
+                <div className="text-[#FFFFFF]  mt-3">
                   <img
                     className="h-auto w-auto "
                     src={(require = "./assets/images/featured.png")}
@@ -76,16 +76,16 @@ export default function IndexPage() {
               </div>
               <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
                 <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] text-[13px] font-medium m-5 ">
                     JON Vs Hmg
                   </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
+                  <div className="text-[#000]  m-5 justify-center items-center flex">
                     <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Visit
                     </button>
                   </div>
                 </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
+                <div className="text-[#FFFFFF]  mt-3">
                   <img
                     className="h-auto w-auto "
                     src={(require = "./assets/images/featured.png")}
@@ -94,81 +94,81 @@ export default function IndexPage() {
                 </div>
               </div>
             </div>
-            <div className="text-xl text-[#333333] font-dmsans font-semibold">
+            <div className="text-xl text-[#333333]  font-semibold">
               My Portfolio
             </div>
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div className="flex items-center justify-evenly h-18 p-5 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
+                <div className="text-[#FFFFFF]  justify-evenly items-center flex flex-row">
                   <img
                     className="h-12 w-12 rounded-2xl"
                     src={(require = "./assets/images/nft1.png")}
                     alt=""
                   />
                 </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   JON Vs Hmg <br />
                   Baseball
                 </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
+                  <div className="text-[#26EA06] flex flex-row justify-between items-center  ">
                     +27.4%
                   </div>
                 </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   Market Gap <br />
                   $530,450
                 </div>
               </div>
               <div className="flex items-center justify-evenly h-18 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
+                <div className="text-[#FFFFFF]  justify-evenly items-center flex flex-row">
                   <img
                     className="h-12 w-12 rounded-2xl"
                     src={(require = "./assets/images/nft2.png")}
                     alt=""
                   />
                 </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   JON Vs Hmg <br />
                   Baseball
                 </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
+                  <div className="text-[#26EA06] flex flex-row justify-between items-center  ">
                     +27.4%
                   </div>
                 </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   Market Gap <br />
                   $530,450
                 </div>
               </div>
               <div className="flex items-center justify-evenly h-18 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
+                <div className="text-[#FFFFFF]  justify-evenly items-center flex flex-row">
                   <img
                     className="h-12 w-12 rounded-2xl"
                     src={(require = "./assets/images/nft2.png")}
                     alt=""
                   />
                 </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   JON Vs Hmg <br />
                   Baseball
                 </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
+                  <div className="text-[#26EA06] flex flex-row justify-between items-center  ">
                     +27.4%
                   </div>
                 </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                <div className="text-[#333333] text-[13px] font-medium  justify-center items-center flex flex-col">
                   Market Gap <br />
                   $530,450
                 </div>
@@ -177,22 +177,22 @@ export default function IndexPage() {
 
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div className="grid grid-cols-2 rounded bg-white h-auto p-3 col-span-2 dark:bg-gray-800">
-                <div className="text-xl absolute text-[#333333] font-dmsans font-semibold">
+                <div className="text-xl absolute text-[#333333]  font-semibold">
                   Top Movers
                 </div>
                 <div className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
+                  <div className="text-[#FFFFFF]  ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
                       src={(require = "./assets/images/nft1.png")}
                       alt=""
                     />
                   </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 ">
                     JON Vs Hmg Baseball <br />
                     $0.0000007
                   </div>
-                  <div className="text-[#000] font-dmsans">
+                  <div className="text-[#000] ">
                     <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Add to watchlist
                     </button>
@@ -202,18 +202,18 @@ export default function IndexPage() {
                   </div>
                 </div>
                 <div className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
+                  <div className="text-[#FFFFFF]  ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
                       src={(require = "./assets/images/nft2.png")}
                       alt=""
                     />
                   </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 ">
                     JON Vs Hmg Baseball <br />
                     $0.0000007
                   </div>
-                  <div className="text-[#000] font-dmsans">
+                  <div className="text-[#000] ">
                     <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Add to watchlist
                     </button>
@@ -223,18 +223,18 @@ export default function IndexPage() {
                   </div>
                 </div>
                 <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
+                  <div className="text-[#FFFFFF]  ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
                       src={(require = "./assets/images/nft1.png")}
                       alt=""
                     />
                   </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 ">
                     JON Vs Hmg Baseball <br />
                     $0.0000007
                   </div>
-                  <div className="text-[#000] font-dmsans">
+                  <div className="text-[#000] ">
                     <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Add to watchlist
                     </button>
@@ -244,18 +244,18 @@ export default function IndexPage() {
                   </div>
                 </div>
                 <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
+                  <div className="text-[#FFFFFF]  ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
                       src={(require = "./assets/images/nft2.png")}
                       alt=""
                     />
                   </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 ">
                     JON Vs Hmg Baseball <br />
                     $0.0000007
                   </div>
-                  <div className="text-[#000] font-dmsans">
+                  <div className="text-[#000] ">
                     <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Add to watchlist
                     </button>
@@ -265,18 +265,18 @@ export default function IndexPage() {
                   </div>
                 </div>
                 <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
+                  <div className="text-[#FFFFFF]  ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
                       src={(require = "./assets/images/nft1.png")}
                       alt=""
                     />
                   </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 ">
                     JON Vs Hmg Baseball <br />
                     $0.0000007
                   </div>
-                  <div className="text-[#000] font-dmsans">
+                  <div className="text-[#000] ">
                     <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Add to watchlist
                     </button>
@@ -286,18 +286,18 @@ export default function IndexPage() {
                   </div>
                 </div>
                 <div className=" flex flex-row m-3 my-0 py-2 justify-between h-full">
-                  <div className="text-[#FFFFFF] font-dmsans ">
+                  <div className="text-[#FFFFFF]  ">
                     <img
                       className="h-[110px] w-[190px] rounded-md "
                       src={(require = "./assets/images/nft2.png")}
                       alt=""
                     />
                   </div>
-                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                  <div className="text-[#333333] w-48 text-[13px] font-medium m-5 ">
                     JON Vs Hmg Baseball <br />
                     $0.0000007
                   </div>
-                  <div className="text-[#000] font-dmsans">
+                  <div className="text-[#000] ">
                     <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
                       Add to watchlist
                     </button>
@@ -309,7 +309,7 @@ export default function IndexPage() {
               </div>
 
               <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
-                <div className="text-xl text-[#333333] font-dmsans font-semibold">
+                <div className="text-xl text-[#333333]  font-semibold">
                   My Wishlist
                 </div>
                 <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
