@@ -96,7 +96,7 @@ export default function IndexPage() {
               Dashboard
             </div>
 
-            <div className="grid grid-cols-4  gap-1">
+            <div className="grid grid-cols-4  gap-y-1 gap-x-4">
               <div className="grid col-span-2">
                 <div className="flex items-center justify-evenly h-18 p-5 rounded bg-white dark:bg-gray-800">
                   <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">

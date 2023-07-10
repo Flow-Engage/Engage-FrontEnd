@@ -32,6 +32,13 @@ export const authOptions = {
       }
       return false;
     },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      return `${baseUrl}/Dashboard`
+      // Allows callback URLs on the same origin
+
+
+    },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
         token.id = user.id;
