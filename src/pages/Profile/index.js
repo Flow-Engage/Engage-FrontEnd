@@ -18,7 +18,7 @@ export default function IndexPage() {
 
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-screen overflow-y-hidden">
-            <div className="text-2xl text-[#333333]  font-semibold cursor-pointer" onClick={()=>router.push("/Dashboard")}>
+            <div className="text-2xl text-[#333333] font-dmsans font-semibold cursor-pointer" onClick={()=>router.push("/Dashboard")}>
               <svg
                 width="24"
                 height="24"
@@ -86,7 +86,7 @@ export default function IndexPage() {
               {/* //////////////////////////////////// */}
               {profileVisible && (
                 <div className="grid rounded h-auto w-3/4 p-3 col-span-3 dark:bg-gray-800">
-                  <div className="text-2xl text-[#333333]  font-medium">
+                  <div className="text-2xl text-[#333333] font-dmsans font-medium">
                     Account Information
                   </div>
                   <div className="flex  flex-row mt-10 items-center justify-center mb-5 ">
@@ -96,54 +96,54 @@ export default function IndexPage() {
                     />
                   </div>
                   <div className="rounded bg-white h-auto p-5  dark:bg-gray-800">
-                    <div className="text-2xl text-[#333333]  font-medium">
+                    <div className="text-2xl text-[#333333] font-dmsans font-medium">
                       Personal Information
                     </div>
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 ">
-                        <div className="text-lg text-[#333333]   font-normal">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 font-dmsans">
+                        <div className="text-lg text-[#333333]  font-dmsans font-normal">
                           Name
                         </div>
-                        <div className="text-lg text-[#333333]   font-thin">
+                        <div className="text-lg text-[#333333]  font-dmsans font-thin">
                           Hemang Vora
                         </div>
                       </div>
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 ">
-                        <div className="text-lg text-[#333333]   font-normal">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 font-dmsans">
+                        <div className="text-lg text-[#333333]  font-dmsans font-normal">
                           UserName
                         </div>
-                        <div className="text-lg text-[#333333]   font-thin">
+                        <div className="text-lg text-[#333333]  font-dmsans font-thin">
                           @HemangVora
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="rounded bg-white h-auto p-5 my-5 dark:bg-gray-800">
-                    <div className="text-2xl text-[#333333]  font-medium">
+                    <div className="text-2xl text-[#333333] font-dmsans font-medium">
                       Contact Information
                     </div>
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 ">
-                        <div className="text-lg text-[#333333]   font-normal">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 font-dmsans">
+                        <div className="text-lg text-[#333333]  font-dmsans font-normal">
                           Email
                         </div>
-                        <div className="text-lg text-[#333333]   font-thin">
+                        <div className="text-lg text-[#333333]  font-dmsans font-thin">
                           hemangvora2@gmail.com
                         </div>
                       </div>
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 ">
-                        <div className="text-lg text-[#333333]   font-normal">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 font-dmsans">
+                        <div className="text-lg text-[#333333]  font-dmsans font-normal">
                           PhoneNo
                         </div>
-                        <div className="text-lg text-[#333333]   font-thin">
+                        <div className="text-lg text-[#333333]  font-dmsans font-thin">
                           +9183484483838
                         </div>
                       </div>
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 ">
-                        <div className="text-lg text-[#333333]   font-normal">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal m-3 mt-0 font-dmsans">
+                        <div className="text-lg text-[#333333]  font-dmsans font-normal">
                           Wallet Address
                         </div>
-                        <div className="text-lg text-[#333333]   font-thin">
+                        <div className="text-lg text-[#333333]  font-dmsans font-thin">
                           0x1212221213
                         </div>
                       </div>
@@ -158,14 +158,14 @@ export default function IndexPage() {
 
               {!profileVisible && (
                 <div className="grid rounded h-auto w-3/4 p-3 col-span-3 dark:bg-gray-800">
-                  <div className="text-2xl text-[#333333]  font-medium">
+                  <div className="text-2xl text-[#333333] font-dmsans font-medium">
                     Settings
                   </div>
 
                   <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
                  
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between items-center font-normal m-3 mt-0 mb-0 ">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between items-center font-normal m-3 mt-0 mb-0 font-dmsans">
                         <div className="flex items-center text-2xl justify-center  ">
                           Wallet
                         </div>
@@ -182,11 +182,11 @@ export default function IndexPage() {
                     </div>
                   </div>
                   <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
-                    <div className="text-xl text-[#333333]  font-medium">
+                    <div className="text-xl text-[#333333] font-dmsans font-medium">
                       Default Payment Method
                     </div>
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-start items-center font-normal m-3 mt-0 mb-0 ">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-start items-center font-normal m-3 mt-0 mb-0 font-dmsans">
                         <div className="flex items-center justify-center pr-20">
                          
                         <label
@@ -233,11 +233,11 @@ export default function IndexPage() {
                     </div>
                   </div>
                   <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
-                    <div className="text-xl text-[#333333]  font-medium">
+                    <div className="text-xl text-[#333333] font-dmsans font-medium">
                       Add / Remove Payment Method
                     </div>
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-evenly items-center font-normal m-3 mt-0 mb-0 ">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-evenly items-center font-normal m-3 mt-0 mb-0 font-dmsans">
                         <div className="flex items-center justify-center">
                           <img
                             className="h-[46px] w-[97px] rounded-md "
@@ -270,11 +270,11 @@ export default function IndexPage() {
                     </div>
                   </div>
                   <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
-                  <div className="text-xl text-[#333333]  font-medium">
+                  <div className="text-xl text-[#333333] font-dmsans font-medium">
                       Account
                     </div>
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
-                      <div className="text-[#333333] text-[13px] flex flex-row justify-between items-center font-normal m-3 mt-0 mb-0 ">
+                      <div className="text-[#333333] text-[13px] flex flex-row justify-between items-center font-normal m-3 mt-0 mb-0 font-dmsans">
                         <div className="flex items-center text-2xl justify-center  ">
                         “Close Engage Account"
                         </div>
@@ -296,14 +296,7 @@ export default function IndexPage() {
       </div>
     );
   }
-  return (
-    <div>
-      <button
-        className=" text-white font-bold py-2 px-4 rounded"
-        onClick={() => signIn("google")}
-      >
-        sign in with gooogle
-      </button>
-    </div>
+    return (
+    router.push("/")
   );
 }

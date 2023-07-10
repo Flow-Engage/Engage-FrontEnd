@@ -22,3 +22,12 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+.hNHgFW:hover{
+  background-color: #c5c5c5 !important;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  padding: 10px !important;
+}
+.MuiTabPanel-root{
+padding:0 !important;
+}

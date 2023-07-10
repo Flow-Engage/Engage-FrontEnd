@@ -217,14 +217,7 @@ export default function NftDetails() {
       </div>
     );
   }
-  return (
-    <div>
-      <button
-        className=" text-white font-bold py-2 px-4 rounded"
-        onClick={() => signIn("google")}
-      >
-        sign in with gooogle
-      </button>
-    </div>
+    return (
+    router.push("/")
   );
 }
