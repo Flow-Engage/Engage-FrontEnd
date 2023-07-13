@@ -42,7 +42,7 @@ export const authOptions = {
         return token;
       }
       return token;
-    },
+    }, 
   }, 
 
   session: {
