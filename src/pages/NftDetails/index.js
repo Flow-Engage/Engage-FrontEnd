@@ -217,7 +217,5 @@ export default function NftDetails() {
       </div>
     );
   }
-    return (
-    router.push("/")
-  );
+  else{return window.open("/", "_self");}
 }

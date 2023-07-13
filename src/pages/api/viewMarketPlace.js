@@ -17,23 +17,13 @@ export default async (req, res) => {
       NFTDetails1,
       NFTDetails2,
     } = req.body;
-   await connectMongo().catch(err=>console.log(err))
-   let post = await Marketplaces.create({
-        marketPlaceName,
-        marketPlaceCategory,
-        marketPlaceReleaseDateTime,
-        NFTQuantity,
-        maxNFTPUser,
-        initialPrice,
-        adminCommision,
-        NFTDetails1, 
-        NFTDetails2,
-    }).then((resp) => {
-        console.log(resp);
-        console.log("New User Added");
-        
+  //  await connectMongo().catch(err=>console.log(err))
+   let post = await Marketplaces.find({}).then((resp) => {
+
+
+        res.json(resp);        
       });
-      res.json(post);
+
 
   } catch (e) {
     console.error(e);

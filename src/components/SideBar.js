@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import bg from "public/assets/images/card_bg.png";
 
-export default function SideBar() {
-  const router = useRouter()
+export default function SideBar({ marketPlaceCategoryList }) {
+  const router = useRouter();
   return (
     <>
       <aside
@@ -89,10 +89,9 @@ export default function SideBar() {
               </Link>
             </li>
 
-           
             <li>
               <button
-                onClick={()=>router.push("/MarketPlace")}
+                onClick={() => router.push("/MarketPlace")}
                 type="button"
                 className="flex items-center w-full p-2 text-[#333333]  "
                 aria-controls="dropdown-example"
@@ -140,30 +139,20 @@ export default function SideBar() {
                     All marketplaces
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/MarketPlace/Soccer"
-                    className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Soccer
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/MarketPlace/Base Ball"
-                    className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Base Ball
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/MarketPlace/Basket Ball"
-                    className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Basket Ball
-                  </Link>
-                </li>
+                {marketPlaceCategoryList &&
+                  marketPlaceCategoryList.map((elem) => {
+                    return (
+                      <li>
+                        <Link
+                          href={"/MarketPlace/"+elem}
+                          className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          {elem}
+                        </Link>
+                      </li>
+                    );
+                  })}
+               
               </ul>
             </li>
             <li>

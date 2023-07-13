@@ -66,7 +66,7 @@ export default function IndexPage() {
   const [AIPrompt1, setAIPrompt1] = useState(``);
   const [AIPrompt2, setAIPrompt2] = useState(``);
   const bodyInfo = JSON.stringify({
-    key: "qgl3bCBpeeUfT2W3zU8FlmZyLu8H9icHDuos1yxH3FHN3CYgAU7Vm1zXhlwp",
+    key: "LjZpbsHV76aet8RfszQPt0thbSSqnslyzMrc2SfJqWqmqOy2YXfrvlgmotA2",
     model_id: "midjourney",
     prompt: AIPrompt1,
     // negative_prompt:
@@ -76,7 +76,7 @@ export default function IndexPage() {
     samples: 1,
     num_inference_steps: "30",
     safety_checker: "no",
-    enhance_prompt: "yes",
+    enhance_prompt: "no",
     seed: null,
     guidance_scale: 7.5,
     webhook: null,
@@ -135,7 +135,7 @@ export default function IndexPage() {
     const picAmount = result.data.output;
     if (picAmount) {
       setAINFT1(picAmount[0]);
-      NftDetails1.url = picAmount[0];
+      NFTDetails1.url = picAmount[0];
     }
     return picAmount;
   }
@@ -158,17 +158,16 @@ export default function IndexPage() {
     };
   }, []);
 
-  async function saveData() { 
-
+  async function saveData() {
     try {
       let response = await fetch("http://localhost:3000/api/addMarketPlace", {
         method: "POST",
-        body: JSON.stringify( {
+        body: JSON.stringify({
           marketPlaceName: marketPlaceName,
           marketPlaceCategory: marketPlaceCategory,
           marketPlaceReleaseDateTime: marketPlaceStartDT,
           NFTQuantity: NFTQuantity,
-          maxNFTPUser:maxNFTPUser,
+          maxNFTPUser: maxNFTPUser,
           initialPrice: initialPrice,
           adminCommision: adminComm,
           NFTDetails1: NFTDetails1,
@@ -177,22 +176,20 @@ export default function IndexPage() {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((e)=>{
-        alert("Saved")      
-      })
-      
+      }).then((e) => {
+        alert("Saved");
+        router.push("/Admin/ViewMarketPlace");
+      });
     } catch (errorMessage) {
       console.error(errorMessage);
     }
-   
-
   }
   if (status === "loading") return <h1> loading... please wait</h1>;
   if (status === "authenticated") {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
-        <AdminSidebar active={"AddMarketplace"}/>
+        <AdminSidebar active={"AddMarketplace"} />
 
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-auto overflow-scroll overflow-y-hidden">
@@ -342,7 +339,7 @@ export default function IndexPage() {
                     <button
                       className="bg-[#0654D6]  w-44 hover:bg-blue-700 text-white font-extralight py-2 px-4 rounded"
                       onClick={() => {
-                        setdescriptionVisible(false)
+                        setdescriptionVisible(false);
                       }}
                     >
                       Proceed
@@ -696,13 +693,13 @@ export default function IndexPage() {
                               type="email"
                               onChange={(e) => {
                                 let name = e.target.value;
-                                setNFTDetails1({...NFTDetails1,name})
+                                NFTDetails1.name = name;
+                                setNFTDetails1({ ...NFTDetails1, name });
                               }}
                               className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder=""
                               required
                             />
-
                           </div>
                         </div>
                         <div className="text-lg text-[#333333] w-[45%]  font-thin">
@@ -717,8 +714,8 @@ export default function IndexPage() {
                               type="email"
                               onChange={(e) => {
                                 let price = e.target.value;
-                                setNFTDetails1({...NFTDetails1,price})
-
+                                NFTDetails1.price = price;
+                                setNFTDetails1({ ...NFTDetails1, price });
                               }}
                               className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder=""
@@ -978,8 +975,8 @@ export default function IndexPage() {
                               type="email"
                               onChange={(e) => {
                                 let name = e.target.value;
-                                setNFTDetails2({...NFTDetails2,name})
-
+                                NFTDetails2.name = name;
+                                setNFTDetails2({ ...NFTDetails2, name });
                               }}
                               className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder=""
@@ -999,8 +996,8 @@ export default function IndexPage() {
                               type="email"
                               onChange={(e) => {
                                 let price = e.target.value;
-                                setNFTDetails2({...NFTDetails2,price})
-
+                                NFTDetails2.price = price;
+                                setNFTDetails2({ ...NFTDetails2, price });
                               }}
                               className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full  dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder=""
@@ -1042,5 +1039,5 @@ export default function IndexPage() {
       </div>
     );
   }
-  return router.push("/");
+  else{return window.open("/", "_self");}
 }

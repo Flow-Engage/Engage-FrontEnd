@@ -1,8 +1,9 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Head({ name, img, signOut }) {
+export default function Head({ name, img }) {
   const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
   const router = useRouter()
 
@@ -16,7 +17,7 @@ export default function Head({ name, img, signOut }) {
           className=" flex  items-center justify-between  "
           aria-label="Global"
         >
-          <div className="flex lg:flex-1 items-center items-center  ">
+          <div className="flex lg:flex-1 ml-64  items-center items-center  ">
             <a href="#" className="-m-1.5 p-1.5"></a>
 
             <form className="flex items-center items-center w-1/2 ml-6">
@@ -151,7 +152,9 @@ export default function Head({ name, img, signOut }) {
                             />
                           </svg>
 
-                          <span className="pl-2  font-normal leading-5 font-dmsans text-[#333333]">
+                          <span className="pl-2  font-normal leading-5 font-dmsans text-[#333333]" onClick={()=>{
+                            signOut()
+                          }}>
                             Logout
                           </span>
                         </a>

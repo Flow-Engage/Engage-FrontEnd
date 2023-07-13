@@ -1,6 +1,6 @@
 import Head from "@/components/Head";
 import { useSession, signIn, signOut } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
 import DataTable, { createTheme } from "react-data-table-component";
@@ -9,6 +9,59 @@ export default function IndexPage() {
   const { data, status } = useSession();
 
   const router = useRouter();
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    try {
+      let response = await fetch("http://localhost:3000/api/viewMarketPlace", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+      console.log(response);
+      let newa = [];
+      response.filter((elem) => {
+        const dateString = elem.marketPlaceReleaseDateTime;
+        const date = new Date(dateString);
+        const options = { month: "numeric", day: "numeric", year: "numeric" };
+        const formattedDate = date.toLocaleDateString("en-US", options);
+
+        console.log(formattedDate); // Output: 8/7/2023
+
+        newa.push({
+          name: (
+            <div className="flex flex-row justify-center items-center">
+              <img
+                className="h-10 w-10 rounded-full mr-1"
+                src={elem.NFTDetails1.ipfs}
+                alt=""
+              />
+              {elem.marketPlaceName}
+            </div>
+          ),
+          category: elem.marketPlaceCategory,
+          adminCommision: elem.adminCommision,
+
+          initialprice: elem.initialprice,
+          createdon: formattedDate,
+        });
+        setTableData(newa)
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   const [tableData, setTableData] = useState([
     {
       name: (
@@ -201,13 +254,9 @@ export default function IndexPage() {
       sortable: true,
     },
     {
-      name: "Current Price",
-      selector: "currentprice",
+      name: "Admin Comm (%)",
+      selector: "adminCommision",
       sortable: true,
-    },
-    {
-      name: "Starting Price",
-      selector: "startingprice",
     },
     {
       name: "Initial Price",
@@ -259,7 +308,7 @@ export default function IndexPage() {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
-        <AdminSidebar active={"ViewMarketplace"}/>
+        <AdminSidebar active={"ViewMarketplace"} />
 
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-[140vh]  overflow-y-hidden">
@@ -284,7 +333,5 @@ export default function IndexPage() {
       </div>
     );
   }
-    return (
-    router.push("/")
-  );
+  else{return window.open("/", "_self");}
 }

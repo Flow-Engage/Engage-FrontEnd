@@ -16,9 +16,69 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
+import { useEffect, useState } from "react";
 
 export default function IndexPage() {
   const { data, status } = useSession();
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const [mostActiveMarketPlace, setMostActiveMarketPlace] = useState([]);
+  const [mostActiveNFT, setMostActiveNFT] = useState([]);
+  const [mostActiveCategory, setMostActiveCategory] = useState([]);
+
+  async function getData() {
+    try {
+      let response = await fetch("http://localhost:3000/api/viewMarketPlace", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+      console.log(response);
+      let mostap = [];
+      let mostan = [];
+      let mostac = [];
+      response.filter((elem) => {
+        const dateString = elem.marketPlaceReleaseDateTime;
+        const date = new Date(dateString);
+        const options = { month: "numeric", day: "numeric", year: "numeric" };
+        const formattedDate = date.toLocaleDateString("en-US", options);
+
+        console.log(formattedDate); // Output: 8/7/2023
+
+        mostap.push({
+          name: elem.marketPlaceName,
+          image: elem.NFTDetails2.ipfs,
+          price:  elem.initialprice,
+        });
+        mostan.push({
+          name: elem.NFTDetails3.name,
+          price: elem.NFTDetails3.price,
+          image: elem.NFTDetails3.ipfs,
+        });
+        mostac.push({
+          name: elem.marketPlaceCategory,
+          price: elem.NFTDetails4.price,
+          image: elem.NFTDetails4.ipfs,
+        });
+      });
+      setMostActiveMarketPlace(mostap);
+      setMostActiveNFT(mostan);
+      setMostActiveCategory(mostac);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   ChartJS.register(
     ArcElement,
     Tooltip,
@@ -219,238 +279,74 @@ export default function IndexPage() {
                   </div>
                 </div>
               </div>
-              <div className="rounded bg-white h-fit p-5 grid  row-span-3 dark:bg-gray-800">
-                <div className="text-[16px] text-[#333333] font-dmsans font-medium">
+              <div className="rounded bg-white h-50 jus p-5 pb-0 mb-1 flex flex-col row-span-3 dark:bg-gray-800">
+                <div className="text-[16px] h-10 text-[#333333] font-dmsans font-medium">
                   Most Active Marketplace
                 </div>
-                <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                  <li className="pb-3 sm:pb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $67
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $2367
-                      </div>
-                    </div>
-                  </li>
-                  <li className="pt-3 pb-0 sm:pt-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $367
-                      </div>
-                    </div>
-                  </li>
+                <ul className="max-w-md  divide-gray-200 dark:divide-gray-700">
+                  {mostActiveMarketPlace &&
+                    mostActiveMarketPlace.map((elem,ind) => {
+                      return (
+                        <li index={ind} className="py-3  border-b-2  ">
+                          <div className="flex items-center space-x-4">
+                            <div className="flex-shrink-0">
+                              <img
+                                className="w-8 h-8 rounded-full"
+                                src={(require = elem.image)}
+                                alt="Neil image"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {elem.name}
+                              </p>
+                              {/* <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                Football
+                              </p> */}
+                            </div>
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              ${elem.price}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                   
                 </ul>
               </div>
-              <div className="rounded bg-white h-fit p-5 grid  row-span-4 dark:bg-gray-800">
+              <div className="rounded bg-white h-50 jus p-5 pb-0 mb-1 flex flex-col row-span-3 dark:bg-gray-800">
                 <div className="text-[16px] text-[#333333] font-dmsans font-medium">
                   Most Active NFTs
                 </div>
-                <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                  <li className="pb-3 sm:pb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $67
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $2367
-                      </div>
-                    </div>
-                  </li>
-                  <li className="pt-3 pb-0 sm:pt-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $367
-                      </div>
-                    </div>
-                  </li>
+                <ul className="max-w-md  divide-gray-200 dark:divide-gray-700">
+                  {mostActiveNFT &&
+                    mostActiveNFT.map((elem,ind) => {
+                      return (
+                        <li index={ind} className="py-3  border-b-2  ">
+                          <div className="flex items-center space-x-4">
+                            <div className="flex-shrink-0">
+                              <img
+                                className="w-8 h-8 rounded-full"
+                                src={(require = elem.image)}
+                                alt="Neil image"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {elem.name}
+                              </p>
+                              {/* <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                Football
+                              </p> */}
+                            </div>
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              {elem.price}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                   
                 </ul>
               </div>
             </div>
@@ -466,121 +362,39 @@ export default function IndexPage() {
                 </div>
               </div>
 
-              <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
+              <div className="rounded bg-white h-50 flex flex-col p-5 dark:bg-gray-800">
                 <div className="text-xl text-[#333333] font-dmsans font-medium">
-                Most Active Category
+                  Most Active Category
                 </div>
-                <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                  <li className="pb-3 sm:pb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $67
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $2367
-                      </div>
-                    </div>
-                  </li>
-                  <li className="pt-3 pb-0 sm:pt-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "/assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Soccer
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          Football
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $367
-                      </div>
-                    </div>
-                  </li>
+                <ul className="max-w-md  divide-gray-200 dark:divide-gray-700">
+                  {mostActiveCategory &&
+                    mostActiveCategory.map((elem,ind) => {
+                      return (
+                        <li index={ind} className="py-3  border-b-2  ">
+                          <div className="flex items-center space-x-4">
+                            <div className="flex-shrink-0">
+                              <img
+                                className="w-8 h-8 rounded-full"
+                                src={(require = elem.image)}
+                                alt="Neil image"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {elem.name}
+                              </p>
+                              {/* <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                Football
+                              </p> */}
+                            </div>
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              {elem.price}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                   
                 </ul>
               </div>
             </div>
@@ -589,14 +403,5 @@ export default function IndexPage() {
       </div>
     );
   }
-  return (
-    <div>
-      <button
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => signIn("google")}
-      >
-        sign in with gooogle
-      </button>
-    </div>
-  );
+  else{return window.open("/", "_self");}
 }

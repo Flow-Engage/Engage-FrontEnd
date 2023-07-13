@@ -7,8 +7,28 @@ import AdminSidebar from "@/components/AdminSidebar";
 export default function IndexPage() {
   const { data, status } = useSession();
   const [descriptionVisible, setdescriptionVisible] = useState(true);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const router = useRouter();
-
+  async function saveData() {
+    try {
+      let response = await fetch("http://localhost:3000/api/addNotifications", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          description,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((e) => {
+        alert("Saved");
+         router.push("/Admin/Dashboard");
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   if (status === "loading") return <h1> loading... please wait</h1>;
   if (status === "authenticated") {
     return (
@@ -46,6 +66,8 @@ export default function IndexPage() {
                         <input
                           type="email"
                           id="email"
+                          onChange={(v)=>setTitle(v.target.value)}
+                          value={title}
                           className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Type here"
                           required
@@ -60,7 +82,9 @@ export default function IndexPage() {
                         </label>
                         <input
                           type="email"
+                          value={description}
                           id="email"
+                          onChange={(v)=>setDescription(v.target.value)}
                           className=" border placeholder:font-light h-20 border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder=""
                           required
@@ -72,7 +96,7 @@ export default function IndexPage() {
                 <div className="w-full flex flex-row justify-end mt-10">
                   <button
                     className="bg-[#0654D6]  w-44 hover:bg-blue-700 text-white font-extralight py-2 px-4 rounded"
-                    onClick={{}}
+                    onClick={()=>{saveData()}}
                   >
                     Post Notification
                   </button>
@@ -84,7 +108,5 @@ export default function IndexPage() {
       </div>
     );
   }
-    return (
-    router.push("/")
-  );
+  else{return window.open("/", "_self");}
 }
