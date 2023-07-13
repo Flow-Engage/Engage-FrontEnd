@@ -44,7 +44,7 @@ function Features() {
                 <p className="text-lg text-gray-600">
                   When you create a marketplace with Engage, supporters in your
                   genre will be able to prove their fandom by purchasing the
-                  NFT's you place in the market.
+                  NFTs you place in the market.
                 </p>
               </div>
               <div className="md:pr-4 text-md lg:pr-12 xl:pr-16 mb-8">

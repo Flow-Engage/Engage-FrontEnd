@@ -24,7 +24,7 @@ function Newsletter() {
                 <p className="text-white text-lg mb-6">
                   When you create a marketplace with Engage, supporters in your
                   genre will be able to prove their fandom by purchasing the
-                  NFT's you place in the market.
+                  NFTs you place in the market.
                 </p>
               </div>
               <button>
