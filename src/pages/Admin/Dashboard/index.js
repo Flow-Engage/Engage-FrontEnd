@@ -287,7 +287,7 @@ export default function IndexPage() {
                   {mostActiveMarketPlace &&
                     mostActiveMarketPlace.map((elem,ind) => {
                       return (
-                        <li index={ind} className="py-3  border-b-2  ">
+                        <li key={ind} className="py-3  border-b-2  ">
                           <div className="flex items-center space-x-4">
                             <div className="flex-shrink-0">
                               <img
