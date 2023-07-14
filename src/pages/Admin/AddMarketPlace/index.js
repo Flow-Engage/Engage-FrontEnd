@@ -160,7 +160,7 @@ export default function IndexPage() {
 
   async function saveData() {
     try {
-      let response = await fetch("http://localhost:3000/api/addMarketPlace", {
+      let response = await fetch(process.env.ORIGIN_URL+"/api/addMarketPlace", {
         method: "POST",
         body: JSON.stringify({
           marketPlaceName: marketPlaceName,

@@ -30,7 +30,7 @@ export default function IndexPage() {
 
   async function getData() {
     try {
-      let response = await fetch("http://localhost:3000/api/viewMarketPlace", {
+      let response = await fetch(process.env.ORIGIN_URL+"/api/viewMarketPlace", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
