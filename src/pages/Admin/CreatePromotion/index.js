@@ -53,7 +53,7 @@ export default function IndexPage() {
 
   async function saveData() {
     try {
-      let response = await fetch(process.env.ORIGIN_URL+"/api/addPromotion", {
+      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/addPromotion", {
         method: "POST",
         body: JSON.stringify({
           ipfs,

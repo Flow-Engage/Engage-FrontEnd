@@ -12,7 +12,7 @@ export default function IndexPage() {
   const router = useRouter();
   async function saveData() {
     try {
-      let response = await fetch(process.env.ORIGIN_URL+"/api/addNotifications", {
+      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/addNotifications", {
         method: "POST",
         body: JSON.stringify({
           title,

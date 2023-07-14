@@ -15,7 +15,7 @@ export default function IndexPage() {
 
   async function getData() {
     try {
-      let response = await fetch(process.env.ORIGIN_URL+"/api/viewMarketPlace", {
+      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/viewMarketPlace", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
