@@ -19,13 +19,12 @@ import { useSession, signIn, signOut } from "next-auth/react";
 // }
 import React from "react";
 
-import Header from "../partials/Header";
-import HeroHome from "../Partials/HeroHome";
-import FeaturesHome from "../Partials/Features";
-import FeaturesBlocks from "../Partials/FeatureBlocks";
-import Testimonials from "../Partials/Testimonials";
-import Newsletter from "../Partials/Newsletter";
-import Footer from "../Partials/Footer";
+import Header from "@/Partials/Header";
+import HeroHome from "@/Partials/HeroHome";
+import FeaturesHome from "@/Partials/Features";
+import FeaturesBlocks from "@/Partials/FeatureBlocks";
+import Newsletter from "@/Partials/Newsletter";
+import Footer from "@/Partials/Footer";
 
 function Home() {
   const { data, status } = useSession();
