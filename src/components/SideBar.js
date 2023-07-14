@@ -140,9 +140,9 @@ export default function SideBar({ marketPlaceCategoryList }) {
                   </Link>
                 </li>
                 {marketPlaceCategoryList &&
-                  marketPlaceCategoryList.map((elem) => {
+                  marketPlaceCategoryList.map((elem,ind) => {
                     return (
-                      <li>
+                      <li key={ind}>
                         <Link
                           href={"/MarketPlace/"+elem}
                           className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"

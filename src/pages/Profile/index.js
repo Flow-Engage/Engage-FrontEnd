@@ -276,7 +276,7 @@ export default function IndexPage() {
                     <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
                       <div className="text-[#333333] text-[13px] flex flex-row justify-between items-center font-normal m-3 mt-0 mb-0 font-dmsans">
                         <div className="flex items-center text-2xl justify-center  ">
-                        “Close Engage Account"
+                        &quot;  Close Engage Account&quot;
                         </div>
                      
                      

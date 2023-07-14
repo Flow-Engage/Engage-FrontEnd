@@ -223,9 +223,9 @@ export default function IndexPage() {
                   Top Movers
                 </div>
                 {topMovers &&
-                  topMovers.map((elem) => {
+                  topMovers.map((elem,ind) => {
                     return (
-                      <div className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
+                      <div key={ind} className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
                         <div className="text-[#FFFFFF] font-dmsans ">
                           <img
                             className="h-[110px] w-[190px] rounded-md "
