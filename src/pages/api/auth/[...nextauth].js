@@ -9,6 +9,7 @@ export const authOptions = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET,
     }),
   ],
+  secret: "YOUsdfks@312381023109312udhs292929292929",
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (user) {
