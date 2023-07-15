@@ -12,12 +12,15 @@ export default function IndexPage() {
   }, []);
   async function getData() {
     try {
-      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/viewMarketPlace", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/TopGainers/All",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then(function (response) {
           // The response is a Response instance.
           // You parse the data into a useable format using `.json()`
@@ -26,20 +29,20 @@ export default function IndexPage() {
         .then(function (data) {
           return data;
         });
-      let mcategory = [];
+
       let Top = [];
       response.filter((elem) => {
-        mcategory.push(elem.marketPlaceCategory);
         Top.push({
-          name: elem.NFTDetails1.name,
-          image: elem.NFTDetails1.ipfs,
-          price: elem.NFTDetails1.price,
+          name: elem.name,
+          image: elem.ipfs,
+          price: elem.price,
           category: elem.marketPlaceCategory,
-          change: elem.NFTDetails1.change,
+          change: elem.change,
         });
       });
-      setTopMovers(Top);
-      setMarketPlaceCategoryList(mcategory);
+      const topThreeMovers = Top.slice(0, 4);
+      setTopMovers(topThreeMovers);
+
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -218,14 +221,21 @@ export default function IndexPage() {
             </div>
 
             <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="grid grid-cols-2 rounded bg-white h-auto p-3 col-span-2 dark:bg-gray-800">
-                <div className="text-xl absolute text-[#333333] font-dmsans font-semibold">
+              <div className="grid grid-cols-2 rounded bg-white h-[40vh] p-3 col-span-2 dark:bg-gray-800">
+                <div className="text-xl absolute text-[#333333]   font-dmsans font-semibold">
                   Top Movers
                 </div>
                 {topMovers &&
-                  topMovers.map((elem,ind) => {
+                  topMovers.map((elem, ind) => {
                     return (
-                      <div key={ind} className=" flex flex-row m-3 mt-7 py-2 justify-between h-full">
+                      <div
+                        key={ind}
+                        className={
+                          ind == 0 || ind == 1
+                            ? " flex flex-row mt-7 justify-between h-fit"
+                            : " flex flex-row  justify-between h-fit"
+                        }
+                      >
                         <div className="text-[#FFFFFF] font-dmsans ">
                           <img
                             className="h-[110px] w-[190px] rounded-md "
@@ -233,12 +243,15 @@ export default function IndexPage() {
                             alt=""
                           />
                         </div>
-                        <div className="text-[#333333] w-48 text-[13px] font-medium m-5 font-dmsans">
+                        <div className="text-[#333333] w-48 text-[14px] font-semibold m-5 font-dmsans">
                           {elem.name} <br />
                           {elem.price}
                           <br />
-                          <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                            + {elem.change} %
+                          <div className="flex font-normal justify-between flex-row">
+                            Today
+                            <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
+                              + {elem.change} %
+                            </div>
                           </div>
                         </div>
 

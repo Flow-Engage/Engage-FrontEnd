@@ -1,9 +1,39 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import bg from "public/assets/images/card_bg.png";
+import { useEffect, useState } from "react";
 
-export default function SideBar({ marketPlaceCategoryList }) {
+export default function SideBar() {
+  const [marketPlaceCategoryList, setMarketPlaceCategoryList] = useState([]);
   const router = useRouter();
+  useEffect(() => {
+    getData();
+  }, []);
+  async function getData() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/marketPlaceCategories",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+
+      setMarketPlaceCategoryList(response);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   return (
     <>
       <aside
@@ -140,11 +170,11 @@ export default function SideBar({ marketPlaceCategoryList }) {
                   </Link>
                 </li>
                 {marketPlaceCategoryList &&
-                  marketPlaceCategoryList.map((elem,ind) => {
+                  marketPlaceCategoryList.map((elem, ind) => {
                     return (
                       <li key={ind}>
                         <Link
-                          href={"/MarketPlace/"+elem}
+                          href={"/MarketPlace/" + elem}
                           className="flex items-center w-full p-2 text-[#333333] transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
                           {elem}
@@ -152,7 +182,6 @@ export default function SideBar({ marketPlaceCategoryList }) {
                       </li>
                     );
                   })}
-               
               </ul>
             </li>
             <li>
