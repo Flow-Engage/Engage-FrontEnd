@@ -7,7 +7,7 @@ const User = new Schema({
   email: String,
   registeredOn: Date,
   isAdmin:Boolean,
-  
+  walletAddress:String
 });
 
 export const Users =  models.User || mongoose.model("User", User);

@@ -13,10 +13,31 @@ export default function Home() {
   useEffect(() => {
     getData();
   }, [id]);
+  async function addWishlist(nftId) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/addWishlist",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+        alert("Added to wishlist");
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   async function getData() {
     try {
       let response = await fetch(
-        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/TopGainers/"+id,
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/TopGainers/" + id,
         {
           method: "GET",
           headers: {
@@ -55,7 +76,7 @@ export default function Home() {
   async function getLosers() {
     try {
       let response = await fetch(
-        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/TopLosers/"+id,
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/TopLosers/" + id,
         {
           method: "GET",
           headers: {
@@ -190,7 +211,7 @@ export default function Home() {
                   </div>
                 </div>
                 <ul className="px-2  divide-y mt-2 divide-gray-200 dark:divide-gray-700">
-                {topMovers &&
+                  {topMovers &&
                     topMovers.map((elem, ind) => {
                       return (
                         <li key={ind} className="py-2">
@@ -218,7 +239,12 @@ export default function Home() {
                                 </div>
                               </div>
                             </div>
+
                             <svg
+                              onClick={() => {
+                                addWishlist(elem.id);
+                              }}
+                              className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -245,9 +271,7 @@ export default function Home() {
                         </li>
                       );
                     })}
-                  
                 </ul>
-            
               </div>
               <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
                 <div className="flex flex-row justify-between items-center px-2">
@@ -259,7 +283,7 @@ export default function Home() {
                   </div>
                 </div>
                 <ul className="px-2 divide-y mt-2 divide-gray-200 dark:divide-gray-700">
-                {topLosers &&
+                  {topLosers &&
                     topLosers.map((elem, ind) => {
                       return (
                         <li key={ind} className="py-2">
@@ -288,6 +312,10 @@ export default function Home() {
                               </div>
                             </div>
                             <svg
+                                 onClick={() => {
+                                  addWishlist(elem.id);
+                                }}
+                                className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -329,7 +357,7 @@ export default function Home() {
                   </div>
                 </div>
                 <ul className="px-2 divide-y mt-2 divide-gray-200 dark:divide-gray-700">
-                <li className="py-2">
+                  <li className="py-2">
                     <div className="flex items-center  justify-evenly space-x-4">
                       <div className="">
                         <img
@@ -346,7 +374,7 @@ export default function Home() {
                           Football
                         </p>
                       </div>
-                      
+
                       <svg
                         width="16"
                         height="16"
@@ -389,7 +417,7 @@ export default function Home() {
                           Football
                         </p>
                       </div>
-                      
+
                       <svg
                         width="16"
                         height="16"
@@ -432,7 +460,7 @@ export default function Home() {
                           Football
                         </p>
                       </div>
-                      
+
                       <svg
                         width="16"
                         height="16"
@@ -475,7 +503,7 @@ export default function Home() {
                           Football
                         </p>
                       </div>
-                    
+
                       <svg
                         width="16"
                         height="16"
@@ -512,5 +540,4 @@ export default function Home() {
       </div>
     );
   }
-   
 }

@@ -10,6 +10,27 @@ export default function IndexPage() {
   useEffect(() => {
     getData();
   }, []);
+  async function addWishlist(nftId) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/addWishlist",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+        alert("Added to wishlist");
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   async function getData() {
     try {
       let response = await fetch(
@@ -193,6 +214,10 @@ export default function IndexPage() {
                               </div>
                             </div>
                             <svg
+                                 onClick={() => {
+                                  addWishlist(elem.id);
+                                }}
+                                className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -263,6 +288,10 @@ export default function IndexPage() {
                               </div>
                             </div>
                             <svg
+                                 onClick={() => {
+                                  addWishlist(elem.id);
+                                }}
+                                className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"

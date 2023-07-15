@@ -1,5 +1,6 @@
 import connectMongo from "@/database/conn";
 import { Users } from "@/models/Users";
+import walletAPIService from "@/services/Wallet/walletAPI.service";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 export const authOptions = {
@@ -17,11 +18,14 @@ export const authOptions = {
         const checkExisting = await Users.findOne({ email: user.email });
 
         if (!checkExisting) {
+          let address =await walletAPIService.createAccount()
+          console.log(address)
           Users.create({
             name: user.name,
             email: user.email,
             registeredOn: new Date(),
             isAdmin: false,
+            walletAddress:address
           }).then((resp) => {
             console.log(resp);
             console.log("New User Added");

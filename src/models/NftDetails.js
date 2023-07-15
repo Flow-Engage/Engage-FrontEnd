@@ -3,7 +3,7 @@ import mongoose, { models } from "mongoose";
 const Schema = mongoose.Schema;
 
 const NftDetailsSchema = new Schema({
-  id: String,
+  id: Number,
   marketPlaceName: String,
   marketPlaceCategory: String,
   name: String,

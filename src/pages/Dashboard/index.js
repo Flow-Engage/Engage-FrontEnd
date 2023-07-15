@@ -7,9 +7,35 @@ export default function IndexPage() {
   const { data, status } = useSession();
   const [marketPlaceCategoryList, setMarketPlaceCategoryList] = useState([]);
   const [topMovers, setTopMovers] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   useEffect(() => {
     getData();
-  }, []);
+    if(data)getWishlist()
+  }, [data]);
+
+  async function addWishlist(nftId) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/addWishlist",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+
+        alert("Added to wishlist");
+        getWishlist()
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   async function getData() {
     try {
       let response = await fetch(
@@ -33,6 +59,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
+          id:elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -40,9 +67,46 @@ export default function IndexPage() {
           change: elem.change,
         });
       });
+      
       const topThreeMovers = Top.slice(0, 4);
       setTopMovers(topThreeMovers);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+  async function getWishlist() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/viewWishlist/"+data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
 
+      let Top = [];
+      response.filter((elem) => {
+        Top.push({
+          id:elem.id,
+          name: elem.name,
+          image: elem.ipfs,
+          price: elem.price,
+          category: elem.marketPlaceCategory,
+          change: elem.change,
+        });
+      });
+
+      setWishlist(Top);
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -256,7 +320,7 @@ export default function IndexPage() {
                         </div>
 
                         <div className="text-[#000] font-dmsans">
-                          <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
+                          <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] " onClick={()=>{addWishlist(elem.id)}}>
                             Add to watchlist
                           </button>
                           <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
@@ -273,116 +337,33 @@ export default function IndexPage() {
                   My Wishlist
                 </div>
                 <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                  <li className="pb-3 sm:pb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
+                {wishlist &&
+                  wishlist.map((elem, ind) => {
+                    return (
+                      <li key={ind} className="pb-3 sm:pb-4">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex-shrink-0">
+                          <img
+                            className="w-8 h-8 rounded-full"
+                            src={(require = elem.image)}
+                            alt="Neil image"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            {elem.name}
+                          </p>
+                          <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                            {elem.category}
+                          </p>
+                        </div>
+                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                          {elem.price}
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Neil Sims
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Bonnie Green
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Michael Gough
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $67
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-3 sm:py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Thomas Lean
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $2367
-                      </div>
-                    </div>
-                  </li>
-                  <li className="pt-3 pb-0 sm:pt-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={(require = "./assets/images/nft2.png")}
-                          alt="Neil image"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Lana Byrd
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          email@flowbite.com
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $367
-                      </div>
-                    </div>
-                  </li>
+                    </li>
+                    )})}
+                  
                 </ul>
               </div>
             </div>
