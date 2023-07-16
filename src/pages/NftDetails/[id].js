@@ -145,9 +145,9 @@ export default function NftDetails() {
                   </div>
                   <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
                     {similar &&
-                      similar.map((elem) => {
+                      similar.map((elem,ind) => {
                         return (
-                          <li className="py-2 ">
+                          <li key={ind} className="py-2 ">
                             <div className="flex items-center  flex-row cursor-pointer" onClick={()=>{
                                 router.push("/NftDetails/"+elem.id)
                               }}>
