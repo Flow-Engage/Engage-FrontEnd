@@ -54,6 +54,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
+          id:elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -93,6 +94,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
+          id:elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,

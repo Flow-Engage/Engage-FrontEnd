@@ -16,7 +16,8 @@ export default async (req, res) => {
     } else {
       let old = existing.nft;
       old.push(nftId);
-      await Wishlist.updateOne({ user }, { $set: { nft: old } });
+      let a = await Wishlist.updateOne({ user }, { $set: { nft: old } });
+
       return res.json({ message: "Wishlist added successfully" });
     }
   } catch (e) {

@@ -16,7 +16,7 @@ import { Box, LinearProgress, Tab, Tabs } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import NftDetails from "@/pages/NftDetails";
+
 import { Marketplaces } from "@/models/MarketPlaces";
 import connectMongo from "@/database/conn";
 const projectId = "2SG3O8eqErKfIsubvGXcJ9GFZ3L";

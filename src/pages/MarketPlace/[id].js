@@ -11,7 +11,7 @@ export default function Home() {
   const [topMovers, setTopMovers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
   useEffect(() => {
-    getData();
+   if(id) getData();
   }, [id]);
   async function addWishlist(nftId) {
     try {
@@ -57,6 +57,7 @@ export default function Home() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
+          id:elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -96,6 +97,7 @@ export default function Home() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
+          id:elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -242,7 +244,8 @@ export default function Home() {
 
                             <svg
                               onClick={() => {
-                                addWishlist(elem.id);
+
+                                 addWishlist(elem.id);
                               }}
                               className="cursor-pointer"
                               width="16"
@@ -313,7 +316,8 @@ export default function Home() {
                             </div>
                             <svg
                                  onClick={() => {
-                                  addWishlist(elem.id);
+
+                                addWishlist(elem.id);
                                 }}
                                 className="cursor-pointer"
                               width="16"

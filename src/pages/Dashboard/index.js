@@ -8,6 +8,7 @@ export default function IndexPage() {
   const [marketPlaceCategoryList, setMarketPlaceCategoryList] = useState([]);
   const [topMovers, setTopMovers] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const router = useRouter();
   useEffect(() => {
     getData();
     if(data)getWishlist()
@@ -294,20 +295,25 @@ export default function IndexPage() {
                     return (
                       <div
                         key={ind}
+                        
                         className={
                           ind == 0 || ind == 1
-                            ? " flex flex-row mt-7 justify-between h-fit"
-                            : " flex flex-row  justify-between h-fit"
+                            ? " flex flex-row mt-7 justify-between h-fit "
+                            : " flex flex-row  justify-between h-fit "
                         }
                       >
-                        <div className="text-[#FFFFFF] font-dmsans ">
+                        <div className="text-[#FFFFFF] font-dmsans cursor-pointer " onClick={()=>{
+                          router.push("/NftDetails/"+elem.id)
+                        }}>
                           <img
                             className="h-[110px] w-[190px] rounded-md "
                             src={(require = elem.image)}
                             alt=""
                           />
                         </div>
-                        <div className="text-[#333333] w-48 text-[14px] font-semibold m-5 font-dmsans">
+                        <div className="text-[#333333] w-48 text-[14px] font-semibold m-5 font-dmsans cursor-pointer " onClick={()=>{
+                          router.push("/NftDetails/"+elem.id)
+                        }}>
                           {elem.name} <br />
                           {elem.price}
                           <br />
@@ -341,7 +347,9 @@ export default function IndexPage() {
                   wishlist.map((elem, ind) => {
                     return (
                       <li key={ind} className="pb-3 sm:pb-4">
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-4 cursor-pointer" onClick={()=>{
+                          router.push("/NftDetails/"+elem.id)
+                        }}>
                         <div className="flex-shrink-0">
                           <img
                             className="w-8 h-8 rounded-full"
