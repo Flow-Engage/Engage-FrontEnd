@@ -9,12 +9,65 @@ export default function IndexPage() {
   const [profileVisible, setProfileVisible] = useState(true);
   const router = useRouter();
 
+  useState(()=>{
+    getPortfolio()
+  },[])
+  const [totalPortfolio, setTotalPortfolio] = useState("");
+  async function getPortfolio() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewPortfolio/" +
+          data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+
+      const Nftarr = Object.keys(response.map);
+      const length = Nftarr.length;
+      let arr = [];
+      let portfolioVal = 0,
+        change = 0;
+      for (let i = 0; i < Math.min(length, 3); i++) {
+        arr.push({
+          id: response.map[Nftarr[i]].details.id,
+          name: response.map[Nftarr[i]].details.name,
+          image: response.map[Nftarr[i]].details.ipfs,
+          price: response.map[Nftarr[i]].details.price,
+          category: response.map[Nftarr[i]].details.marketPlaceCategory,
+          change: response.map[Nftarr[i]].details.change,
+          buyPrice: response.map[Nftarr[i]].buyPrice,
+        });
+        portfolioVal += parseInt(
+          response.map[Nftarr[i]].details.price.replace(/\$/g, "")
+        );
+        change += parseInt(response.map[Nftarr[i]].details.change);
+      }
+      setTotalPortfolio(portfolioVal + ":" + change);
+
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+
   if (status === "loading") return <h1> loading... please wait</h1>;
   if (status === "authenticated") {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
-        <SideBar />
+{        totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
 
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-screen overflow-y-hidden">

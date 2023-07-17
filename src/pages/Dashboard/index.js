@@ -1,6 +1,7 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 export default function IndexPage() {
@@ -15,6 +16,8 @@ export default function IndexPage() {
   }, [data]);
 
   const [promotions, setPromotions] = useState([]);
+  const [portfolio, setPortfolio] = useState([]);
+  const [totalPortfolio, setTotalPortfolio] = useState("");
 
   async function getPromotions() {
     try {
@@ -42,6 +45,7 @@ export default function IndexPage() {
           nftId: elem.nftId,
         });
       });
+      getPortfolio();
       setPromotions(arr);
     } catch (errorMessage) {
       console.error(errorMessage);
@@ -63,6 +67,29 @@ export default function IndexPage() {
         }
       ).then((e) => {
         alert("Added to wishlist");
+        getWishlist();
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+  async function buyNft(nftId, buyPrice) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/buyNft",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+            buyPrice: buyPrice,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+        alert("NFT Minted");
         getWishlist();
       });
     } catch (errorMessage) {
@@ -146,14 +173,62 @@ export default function IndexPage() {
       console.error(errorMessage);
     }
   }
+  async function getPortfolio() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewPortfolio/" +
+          data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+
+      const Nftarr = Object.keys(response.map);
+      const length = Nftarr.length;
+      let arr = [];
+      let portfolioVal = 0,
+        change = 0;
+      for (let i = 0; i < Math.min(length, 3); i++) {
+        arr.push({
+          id: response.map[Nftarr[i]].details.id,
+          name: response.map[Nftarr[i]].details.name,
+          image: response.map[Nftarr[i]].details.ipfs,
+          price: response.map[Nftarr[i]].details.price,
+          category: response.map[Nftarr[i]].details.marketPlaceCategory,
+          change: response.map[Nftarr[i]].details.change,
+          buyPrice: response.map[Nftarr[i]].buyPrice,
+        });
+        portfolioVal += parseInt(
+          response.map[Nftarr[i]].details.price.replace(/\$/g, "")
+        );
+        change += parseInt(response.map[Nftarr[i]].details.change);
+      }
+      setTotalPortfolio(portfolioVal + ":" + change);
+      setPortfolio(arr);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   if (status === "loading") return <h1> loading... please wait</h1>;
   if (status === "authenticated") {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
         {console.log(data)}
-        {marketPlaceCategoryList && (
-          <SideBar marketPlaceCategoryList={marketPlaceCategoryList} />
+        {totalPortfolio && (
+          <SideBar totalPortfolio={totalPortfolio} />
         )}
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
@@ -204,81 +279,41 @@ export default function IndexPage() {
               My Portfolio
             </div>
             <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="flex items-center justify-evenly h-18 p-5 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
-                  <img
-                    className="h-12 w-12 rounded-2xl"
-                    src={(require = "./assets/images/nft1.png")}
-                    alt=""
-                  />
-                </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  JON Vs Hmg <br />
-                  Baseball
-                </div>
+              {portfolio &&
+                portfolio.map((elem, ind) => {
+                  return (
+                    <div
+                      key={ind}
+                      className="flex items-center justify-around h-18 p-5 px-0 rounded bg-white dark:bg-gray-800 cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}
+                    >
+                      <div className="text-[#FFFFFF] font-dmsans justify-between items-center flex flex-row">
+                        <Image
+                          height="80"
+                          width="100"
+                          className="h-12 w-12 rounded-2xl"
+                          src={elem.image}
+                          alt=""
+                        />
+                        <div className="text-[#333333] ml-2 text-[13px] font-medium font-dmsans justify-center items-start flex flex-col">
+                          <div className="font-semibold"> {elem.name}</div>
+                          {elem.category}
+                        </div>
+                      </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                    +27.4%
-                  </div>
-                </div>
+                      <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                        <div className="font-semibold"> Change</div>
+                        <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
+                          +{elem.change}%
+                        </div>
+                      </div>
 
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Market Gap <br />
-                  $530,450
-                </div>
-              </div>
-              <div className="flex items-center justify-evenly h-18 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
-                  <img
-                    className="h-12 w-12 rounded-2xl"
-                    src={(require = "./assets/images/nft2.png")}
-                    alt=""
-                  />
-                </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  JON Vs Hmg <br />
-                  Baseball
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                    +27.4%
-                  </div>
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Market Gap <br />
-                  $530,450
-                </div>
-              </div>
-              <div className="flex items-center justify-evenly h-18 rounded bg-white dark:bg-gray-800">
-                <div className="text-[#FFFFFF] font-dmsans justify-evenly items-center flex flex-row">
-                  <img
-                    className="h-12 w-12 rounded-2xl"
-                    src={(require = "./assets/images/nft2.png")}
-                    alt=""
-                  />
-                </div>
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  JON Vs Hmg <br />
-                  Baseball
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Revenue <br />
-                  <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                    +27.4%
-                  </div>
-                </div>
-
-                <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
-                  Market Gap <br />
-                  $530,450
-                </div>
-              </div>
+                      <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
+                        <div className="font-semibold"> Price</div>
+                        {elem.price}
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
 
             <div className="grid grid-cols-3 gap-4 mb-4">
@@ -335,7 +370,12 @@ export default function IndexPage() {
                           >
                             Add to wishlist
                           </button>
-                          <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
+                          <button
+                            className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] "
+                            onClick={() => {
+                              buyNft(elem.id, elem.price);
+                            }}
+                          >
                             Buy
                           </button>
                         </div>

@@ -17,6 +17,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState } from "react";
+import HeadAdmin from "@/components/HeadAdmin";
 
 export default function IndexPage() {
   const { data, status } = useSession();
@@ -153,7 +154,7 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+        <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
         <AdminSidebar active={"Dashboard"} />
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import bg from "public/assets/images/card_bg.png";
 import { useEffect, useState } from "react";
 
-export default function SideBar() {
+export default function SideBar({ totalPortfolio }) {
   const [marketPlaceCategoryList, setMarketPlaceCategoryList] = useState([]);
   const router = useRouter();
   useEffect(() => {
@@ -65,33 +65,36 @@ export default function SideBar() {
                     backgroundRepeat: "no-repeat",
                   }}
                 >
-                  <div className="w-50 flex flex-col justify-between h-full">
-                    <div className="text-[#FFFFFF] text-[16px] font-extralight font-dmsans">
-                      Total Portfolio
+                  {totalPortfolio && (
+                    <div className="w-60 flex flex-col justify-start h-full">
+                      <div className="text-[#FFFFFF] text-[16px] font-extralight font-dmsans">
+                        Total Portfolio
+                      </div>
+                      <div className="text-[#FFFFFF] text-[14px] font-dmsans ">
+                        ${totalPortfolio.split(":")[0]}
+                      </div>
                     </div>
-                    <div className="text-[#FFFFFF] font-dmsans mt-3">
-                      $152,548,485
+                  )}
+                  {totalPortfolio && (
+                    <div className="w-40 flex flex-row justify-end items-center h-full">
+                      <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M12.8537 7.35375C12.8073 7.40024 12.7521 7.43711 12.6914 7.46228C12.6307 7.48744 12.5657 7.50039 12.5 7.50039C12.4343 7.50039 12.3692 7.48744 12.3085 7.46228C12.2478 7.43711 12.1927 7.40024 12.1462 7.35375L8.49997 3.70687V13.5C8.49997 13.6326 8.44729 13.7598 8.35353 13.8535C8.25976 13.9473 8.13258 14 7.99997 14C7.86736 14 7.74019 13.9473 7.64642 13.8535C7.55265 13.7598 7.49997 13.6326 7.49997 13.5V3.70687L3.85372 7.35375C3.7599 7.44757 3.63265 7.50027 3.49997 7.50027C3.36729 7.50027 3.24004 7.44757 3.14622 7.35375C3.0524 7.25993 2.99969 7.13268 2.99969 7C2.99969 6.86731 3.0524 6.74007 3.14622 6.64625L7.64622 2.14625C7.69266 2.09976 7.7478 2.06288 7.8085 2.03772C7.8692 2.01255 7.93426 1.9996 7.99997 1.9996C8.06568 1.9996 8.13074 2.01255 8.19144 2.03772C8.25214 2.06288 8.30729 2.09976 8.35372 2.14625L12.8537 6.64625C12.9002 6.69268 12.9371 6.74783 12.9623 6.80853C12.9874 6.86923 13.0004 6.93429 13.0004 7C13.0004 7.0657 12.9874 7.13077 12.9623 7.19147C12.9371 7.25217 12.9002 7.30731 12.8537 7.35375Z"
+                            fill="#26EA06"
+                          />
+                        </svg>
+                        +{totalPortfolio.split(":")[1]}%
+                      </div>
+                      <div></div>
                     </div>
-                    <div></div>
-                  </div>
-                  <div className="w-40 flex flex-row justify-end items-center h-full">
-                    <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12.8537 7.35375C12.8073 7.40024 12.7521 7.43711 12.6914 7.46228C12.6307 7.48744 12.5657 7.50039 12.5 7.50039C12.4343 7.50039 12.3692 7.48744 12.3085 7.46228C12.2478 7.43711 12.1927 7.40024 12.1462 7.35375L8.49997 3.70687V13.5C8.49997 13.6326 8.44729 13.7598 8.35353 13.8535C8.25976 13.9473 8.13258 14 7.99997 14C7.86736 14 7.74019 13.9473 7.64642 13.8535C7.55265 13.7598 7.49997 13.6326 7.49997 13.5V3.70687L3.85372 7.35375C3.7599 7.44757 3.63265 7.50027 3.49997 7.50027C3.36729 7.50027 3.24004 7.44757 3.14622 7.35375C3.0524 7.25993 2.99969 7.13268 2.99969 7C2.99969 6.86731 3.0524 6.74007 3.14622 6.64625L7.64622 2.14625C7.69266 2.09976 7.7478 2.06288 7.8085 2.03772C7.8692 2.01255 7.93426 1.9996 7.99997 1.9996C8.06568 1.9996 8.13074 2.01255 8.19144 2.03772C8.25214 2.06288 8.30729 2.09976 8.35372 2.14625L12.8537 6.64625C12.9002 6.69268 12.9371 6.74783 12.9623 6.80853C12.9874 6.86923 13.0004 6.93429 13.0004 7C13.0004 7.0657 12.9874 7.13077 12.9623 7.19147C12.9371 7.25217 12.9002 7.30731 12.8537 7.35375Z"
-                          fill="#26EA06"
-                        />
-                      </svg>
-                      +27.4%
-                    </div>
-                    <div></div>
-                  </div>
+                  )}
                 </div>
               </Link>
             </li>

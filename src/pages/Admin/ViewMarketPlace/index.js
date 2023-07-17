@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
 import DataTable, { createTheme } from "react-data-table-component";
 import { Button } from "flowbite-react";
+import HeadAdmin from "@/components/HeadAdmin";
 export default function IndexPage() {
   const { data, status } = useSession();
 
@@ -307,7 +308,7 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+        <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
         <AdminSidebar active={"ViewMarketplace"} />
 
         <div className="p-4 pt-0 sm:ml-64 ">

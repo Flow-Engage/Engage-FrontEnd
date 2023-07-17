@@ -4,12 +4,15 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 export default function IndexPage() {
   const { data, status } = useSession();
   const [tabValue1, setTabValue1] = useState("1");
   const [wishlist, setWishlist] = useState([]);
+  const [portfolio, setPortfolio] = useState([]);
+  const [totalPortfolio, setTotalPortfolio] = useState("");
   const router = useRouter();
   const handleChange1 = (event, newValue) => {
     setTabValue1(newValue);
@@ -52,6 +55,55 @@ export default function IndexPage() {
       });
 
       setWishlist(Top);
+      getPortfolio();
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+  async function getPortfolio() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewPortfolio/" +
+          data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+
+      const Nftarr = Object.keys(response.map);
+      const length = Nftarr.length;
+      let arr = [];
+      let portfolioVal = 0,
+        change = 0;
+      for (let i = 0; i < length; i++) {
+        arr.push({
+          id: response.map[Nftarr[i]].details.id,
+          name: response.map[Nftarr[i]].details.name,
+          image: response.map[Nftarr[i]].details.ipfs,
+          price: response.map[Nftarr[i]].details.price,
+          category: response.map[Nftarr[i]].details.marketPlaceCategory,
+          change: response.map[Nftarr[i]].details.change,
+          buyPrice: response.map[Nftarr[i]].buyPrice,
+        });
+        portfolioVal += parseInt(
+          response.map[Nftarr[i]].details.price.replace(/\$/g, "")
+        );
+        change += parseInt(response.map[Nftarr[i]].details.change);
+      }
+      setTotalPortfolio(portfolioVal + ":" + change);
+      setPortfolio(arr);
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -61,7 +113,7 @@ export default function IndexPage() {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
-        <SideBar />
+        {totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div
@@ -79,7 +131,7 @@ export default function IndexPage() {
             <div className="relative  -top-16   ">
               <div className="flex flex-row justify-evenly items-center">
                 <div className="text-2xl text-[#333333] font-dmsans font-normal w-[25%] ">
-                  Hemang Vora
+                  {data.user.name}
                   <div className="flex flex-row text-sm justify-between items-center w-auto">
                     <div className="flex flex-row">
                       <svg
@@ -134,7 +186,7 @@ export default function IndexPage() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 mb-4 mt-3">
+            <div className="grid grid-cols-1 gap-4 mb-4 -top-14 relative">
               <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
                 <div className="flex flex-row justify-between items-center px-2">
                   <Box sx={{ width: "100%", typography: "body1" }} className="">
@@ -153,104 +205,73 @@ export default function IndexPage() {
                           <Tab label="wishlist" value="2" />
                         </TabList>
                       </Box>
-                      <TabPanel className="p-0" value="1">
-                        <div className="px-2 flex flex-row   divide-y mt-10 divide-gray-200 dark:divide-gray-700">
-                          <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                              <img
-                                className="rounded-t-lg h-60 w-full"
-                                src="/assets/images/nft1.png"
-                                alt=""
-                              />
-                            </a>
-                            <div className="p-5">
-                              <a href="#">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                  Lorem ipsum dolor sit amet consectetur.
-                                </h5>
-                              </a>
-                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                80 USDT
-                              </p>
-                            </div>
-                          </div>
-                          <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                              <img
-                                className="rounded-t-lg h-60 w-full"
-                                src="/assets/images/nft2.png"
-                                alt=""
-                              />
-                            </a>
-                            <div className="p-5">
-                              <a href="#">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                  Lorem ipsum dolor sit amet consectetur.
-                                </h5>
-                              </a>
-                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                80 USDT
-                              </p>
-                            </div>
-                          </div>
-                          <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <a href="#">
-                              <img
-                                className="rounded-t-lg h-60 w-full"
-                                src="/assets/images/nft1.png"
-                                alt=""
-                              />
-                            </a>
-                            <div className="p-5">
-                              <a href="#">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                  Lorem ipsum dolor sit amet consectetur.
-                                </h5>
-                              </a>
-                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                80 USDT
-                              </p>
-                            </div>
-                          </div>
+                      <TabPanel className="p-0  h-auto" value="1">
+                        <div className="px-2 flex flex-row   divide-gray-200 dark:divide-gray-700">
+                          {portfolio &&
+                            portfolio.map((elem, ind) => {
+                              return (
+                                <div key={ind} className="float-left w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                  <Link href={"/NftDetails/"+elem.id}>
+                                    <img
+                                      className="rounded-t-lg h-60 w-full"
+                                      src={elem.image}
+                                      alt=""
+                                    />
+                                  </Link>
+                                  <div className="p-5">
+                                  <Link href={"/NftDetails/"+elem.id}>
+                                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                        {elem.name}
+                                      </h5>
+                                    </Link>
+                                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                      {elem.price}
+                                    </p>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                           
+                           
                         </div>
                       </TabPanel>
                       <TabPanel className="p-0" value="2">
-                      <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                  {wishlist &&
-                    wishlist.map((elem, ind) => {
-                      return (
-                        <li key={ind} className="pb-3 sm:pb-4">
-                          <div
-                            className="flex items-center space-x-4 cursor-pointer"
-                            onClick={() => {
-                              router.push("/NftDetails/" + elem.id);
-                            }}
-                          >
-                            <div className="flex-shrink-0">
-                              <Image
-                                height={"100"}
-                                width="100"
-                                className="w-8 h-8 rounded-full"
-                                src={(require = elem.image)}
-                                alt="Neil image"
-                              />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                {elem.name}
-                              </p>
-                              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                                {elem.category}
-                              </p>
-                            </div>
-                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                              {elem.price}
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                </ul>
+                        <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
+                          {wishlist &&
+                            wishlist.map((elem, ind) => {
+                              return (
+                                <li key={ind} className="pb-3 sm:pb-4">
+                                  <div
+                                    className="flex items-center space-x-4 cursor-pointer"
+                                    onClick={() => {
+                                      router.push("/NftDetails/" + elem.id);
+                                    }}
+                                  >
+                                    <div className="flex-shrink-0">
+                                      <Image
+                                        height={"100"}
+                                        width="100"
+                                        className="w-8 h-8 rounded-full"
+                                        src={(require = elem.image)}
+                                        alt="Neil image"
+                                      />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                        {elem.name}
+                                      </p>
+                                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                        {elem.category}
+                                      </p>
+                                    </div>
+                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                      {elem.price}
+                                    </div>
+                                  </div>
+                                </li>
+                              );
+                            })}
+                        </ul>
                       </TabPanel>
                     </TabContext>
                   </Box>

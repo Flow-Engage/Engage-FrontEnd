@@ -19,6 +19,7 @@ import TabPanel from "@mui/lab/TabPanel";
 
 import { Marketplaces } from "@/models/MarketPlaces";
 import connectMongo from "@/database/conn";
+import HeadAdmin from "@/components/HeadAdmin";
 const projectId = "2SG3O8eqErKfIsubvGXcJ9GFZ3L";
 const projectSecret = "be4bb4e2d8017edf33961dccfe618d41";
 const auth =
@@ -188,7 +189,7 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+        <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
         <AdminSidebar active={"AddMarketplace"} />
 
         <div className="p-4 pt-0 sm:ml-64 ">

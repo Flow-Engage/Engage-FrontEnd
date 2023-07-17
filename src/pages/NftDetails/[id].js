@@ -8,6 +8,7 @@ export default function NftDetails() {
   const { data, status } = useSession();
   const [nft, setNft] = useState({});
   const [similar, setSimilar] = useState([]);
+  const [totalPortfolio, setTotalPortfolio] = useState("");
   const router = useRouter();
 
   const { id } = router.query;
@@ -54,6 +55,99 @@ export default function NftDetails() {
         }
       });
       setSimilar(arr);
+      getPortfolio();
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+
+  async function getPortfolio() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewPortfolio/" +
+          data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+
+      const Nftarr = Object.keys(response.map);
+      const length = Nftarr.length;
+      let arr = [];
+      let portfolioVal = 0,
+        change = 0;
+      for (let i = 0; i < Math.min(length, 3); i++) {
+        arr.push({
+          id: response.map[Nftarr[i]].details.id,
+          name: response.map[Nftarr[i]].details.name,
+          image: response.map[Nftarr[i]].details.ipfs,
+          price: response.map[Nftarr[i]].details.price,
+          category: response.map[Nftarr[i]].details.marketPlaceCategory,
+          change: response.map[Nftarr[i]].details.change,
+          buyPrice: response.map[Nftarr[i]].buyPrice,
+        });
+        portfolioVal += parseInt(
+          response.map[Nftarr[i]].details.price.replace(/\$/g, "")
+        );
+        change += parseInt(response.map[Nftarr[i]].details.change);
+      }
+      setTotalPortfolio(portfolioVal + ":" + change);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+
+  async function addWishlist(nftId) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/addWishlist",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+        alert("Added to wishlist");
+      });
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+  async function buyNft(nftId, buyPrice) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/buyNft",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+            buyPrice: buyPrice,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+        alert("NFT Minted");
+      });
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -63,7 +157,7 @@ export default function NftDetails() {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
-        <SideBar />
+        {totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
 
         <div className="p-0 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-screen overflow-y-hidden">
@@ -106,10 +200,20 @@ export default function NftDetails() {
                         <div className="text-[#EA0606] ml-5">{nft.change}%</div>
                       </div>
                       <div className="text-[#000] font-dmsans">
-                        <button className="w-full text-[10px] h-auto p-3 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
+                        <button
+                          className="w-full text-[10px] h-auto p-3 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] "
+                          onClick={() => {
+                            addWishlist(nft.id);
+                          }}
+                        >
                           Add to wishlist
                         </button>
-                        <button className="w-full text-[10px] h-auto p-3 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
+                        <button
+                          className="w-full text-[10px] h-auto p-3 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] "
+                          onClick={() => {
+                            buyNft(nft.id, nft.price);
+                          }}
+                        >
                           Buy
                         </button>
                       </div>
@@ -145,12 +249,15 @@ export default function NftDetails() {
                   </div>
                   <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
                     {similar &&
-                      similar.map((elem,ind) => {
+                      similar.map((elem, ind) => {
                         return (
                           <li key={ind} className="py-2 ">
-                            <div className="flex items-center  flex-row cursor-pointer" onClick={()=>{
-                                router.push("/NftDetails/"+elem.id)
-                              }}>
+                            <div
+                              className="flex items-center  flex-row cursor-pointer"
+                              onClick={() => {
+                                router.push("/NftDetails/" + elem.id);
+                              }}
+                            >
                               <div className=" ">
                                 <img
                                   className="w-12 h-12 rounded-full mr-10"
@@ -158,19 +265,32 @@ export default function NftDetails() {
                                   alt="Neil image"
                                 />
                               </div>
-                              <div className="flex flex-row justify-between w-full cursor-pointer" onClick={()=>{
-                                router.push("/NftDetails/"+elem.id)
-                              }}>
-                                <div className="text-[#333333]  font-medium  font-dmsans">
+                              <div className="flex flex-row justify-between w-full ">
+                                <div
+                                  className="text-[#333333]  font-medium  font-dmsans cursor-pointer"
+                                  onClick={() => {
+                                    router.push("/NftDetails/" + elem.id);
+                                  }}
+                                >
                                   {elem.name}
                                   <br />
                                   {elem.price}
                                 </div>
                                 <div className="text-[#000] font-dmsans flex items-center justify-evenly w-auto flex-col">
-                                  <button className="w-24 h-auto text-[10px] p-2  rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
+                                  <button
+                                    className="w-24 h-auto text-[10px] p-2  rounded-lg bg-[#F2F2F2] text-[#0654D6] "
+                                    onClick={() => {
+                                      addWishlist(elem.id);
+                                    }}
+                                  >
                                     Add to wishlist
                                   </button>
-                                  <button className="w-24 h-auto text-[10px] p-2  my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
+                                  <button
+                                    className="w-24 h-auto text-[10px] p-2  my-0 rounded-lg bg-[#0654D6] text-[#FFF] "
+                                    onClick={() => {
+                                      buyNft(elem.id, elem.price);
+                                    }}
+                                  >
                                     Buy
                                   </button>
                                 </div>

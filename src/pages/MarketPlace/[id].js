@@ -11,6 +11,7 @@ export default function Home() {
   const { id } = router.query;
   const [topMovers, setTopMovers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
+  const [totalPortfolio, setTotalPortfolio] = useState("");
   useEffect(() => {
     if (id) getData();
   }, [id]);
@@ -108,6 +109,79 @@ export default function Home() {
       });
       const topThreeMovers = Top.slice(0, 4);
       setTopLosers(topThreeMovers);
+      getPortfolio()
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+
+  async function getPortfolio() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewPortfolio/" +
+          data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+
+      const Nftarr = Object.keys(response.map);
+      const length = Nftarr.length;
+      let arr = [];
+      let portfolioVal = 0,
+        change = 0;
+      for (let i = 0; i < Math.min(length, 3); i++) {
+        arr.push({
+          id: response.map[Nftarr[i]].details.id,
+          name: response.map[Nftarr[i]].details.name,
+          image: response.map[Nftarr[i]].details.ipfs,
+          price: response.map[Nftarr[i]].details.price,
+          category: response.map[Nftarr[i]].details.marketPlaceCategory,
+          change: response.map[Nftarr[i]].details.change,
+          buyPrice: response.map[Nftarr[i]].buyPrice,
+        });
+        portfolioVal += parseInt(
+          response.map[Nftarr[i]].details.price.replace(/\$/g, "")
+        );
+        change += parseInt(response.map[Nftarr[i]].details.change);
+      }
+      setTotalPortfolio(portfolioVal + ":" + change);
+
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+  async function buyNft(nftId, buyPrice) {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/buyNft",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            user: data.user.email,
+            nftId: nftId,
+            buyPrice: buyPrice,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
+        alert("NFT Minted");
+        getWishlist();
+      });
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -119,7 +193,9 @@ export default function Home() {
     return (
       <div>
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
-        <SideBar />
+        {totalPortfolio && (
+          <SideBar totalPortfolio={totalPortfolio} />
+        )}
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="text-xl text-[#333333] font-dmsans font-semibold">
@@ -223,7 +299,7 @@ export default function Home() {
                       return (
                         <li key={ind} className="py-2">
                           <div className="flex items-center  justify-evenly space-x-4">
-                            <div className="">
+                            <div className="cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}>
                               <Image
                                 height="80"
                                 width="100"
@@ -232,7 +308,7 @@ export default function Home() {
                                 alt="Neil image"
                               />
                             </div>
-                            <div className="w-[50%]">
+                            <div className="w-[50%] cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}>
                               <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                                 {elem.name}
                               </p>
@@ -240,7 +316,7 @@ export default function Home() {
                                 {elem.category}
                               </p>
                             </div>
-                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}>
                               <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
                                 {elem.price} <br />
                                 <div className="text-[#26EA06] flex flex-row justify-between items-center  font-dmsans">
@@ -273,7 +349,10 @@ export default function Home() {
                                 </clipPath>
                               </defs>
                             </svg>
-                            <button className="w-20 h-auto px-5 p-1 text-sm rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
+                            <button className="w-20 h-auto px-5 p-1 text-sm rounded-lg bg-[#F2F2F2] text-[#0654D6] "
+                             onClick={() => {
+                              buyNft(elem.id, elem.price);
+                            }}>
                               Buy
                             </button>
                           </div>
@@ -297,14 +376,14 @@ export default function Home() {
                       return (
                         <li key={ind} className="py-2">
                           <div className="flex items-center  justify-evenly space-x-4">
-                            <div className="">
+                            <div className="cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}>
                               <img
                                 className="w-10 h-8 rounded-full"
                                 src={(require = elem.image)}
                                 alt="Neil image"
                               />
                             </div>
-                            <div className="w-[50%]">
+                            <div className="w-[50%] cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}>
                               <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                                 {elem.name}
                               </p>
@@ -312,7 +391,7 @@ export default function Home() {
                                 {elem.category}
                               </p>
                             </div>
-                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}>
                               <div className="text-[#333333] text-[13px] font-medium font-dmsans justify-center items-center flex flex-col">
                                 {elem.price} <br />
                                 <div className="text-[#EA0606] flex flex-row justify-between items-center  font-dmsans">
@@ -344,7 +423,10 @@ export default function Home() {
                                 </clipPath>
                               </defs>
                             </svg>
-                            <button className="w-20 h-auto px-5 p-1 text-sm rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
+                            <button className="w-20 h-auto px-5 p-1 text-sm rounded-lg bg-[#F2F2F2] text-[#0654D6] "
+                             onClick={() => {
+                              buyNft(elem.id, elem.price);
+                            }}>
                               Buy
                             </button>
                           </div>

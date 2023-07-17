@@ -3,6 +3,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
+import HeadAdmin from "@/components/HeadAdmin";
 
 export default function IndexPage() {
   const { data, status } = useSession();
@@ -33,7 +34,7 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+        <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
         <AdminSidebar  active={"createNotification"}/>
 
         <div className="p-4 pt-0 sm:ml-64 ">
