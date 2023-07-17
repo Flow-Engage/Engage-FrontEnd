@@ -11,9 +11,42 @@ export default function IndexPage() {
   const router = useRouter();
   useEffect(() => {
     getData();
-    if(data)getWishlist()
+    if (data) getWishlist();
   }, [data]);
 
+  const [promotions, setPromotions] = useState([]);
+
+  async function getPromotions() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/viewPromotion/All",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+      let arr = [];
+      response.filter((elem) => {
+        arr.push({
+          title: elem.title,
+          details: elem.details,
+          image: elem.ipfs,
+          nftId: elem.nftId,
+        });
+      });
+      setPromotions(arr);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   async function addWishlist(nftId) {
     try {
       let response = await fetch(
@@ -29,9 +62,8 @@ export default function IndexPage() {
           },
         }
       ).then((e) => {
-
         alert("Added to wishlist");
-        getWishlist()
+        getWishlist();
       });
     } catch (errorMessage) {
       console.error(errorMessage);
@@ -60,7 +92,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
-          id:elem.id,
+          id: elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -68,7 +100,7 @@ export default function IndexPage() {
           change: elem.change,
         });
       });
-      
+
       const topThreeMovers = Top.slice(0, 4);
       setTopMovers(topThreeMovers);
     } catch (errorMessage) {
@@ -78,7 +110,9 @@ export default function IndexPage() {
   async function getWishlist() {
     try {
       let response = await fetch(
-        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/viewWishlist/"+data.user.email,
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewWishlist/" +
+          data.user.email,
         {
           method: "GET",
           headers: {
@@ -98,7 +132,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
-          id:elem.id,
+          id: elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -106,7 +140,7 @@ export default function IndexPage() {
           change: elem.change,
         });
       });
-
+      getPromotions();
       setWishlist(Top);
     } catch (errorMessage) {
       console.error(errorMessage);
@@ -127,82 +161,44 @@ export default function IndexPage() {
               Featured
             </div>
             <div className="grid grid-cols-4 gap-4 mb-4">
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src={(require = "./assets/images/featured.png")}
-                    alt=""
-                  />
-                </div>
-              </div>
+              {promotions &&
+                promotions.map((elem, ind) => {
+                  return (
+                    <div
+                      key={ind}
+                      className="flex items-center justify-start h-auto rounded  "
+                      style={{
+                        backgroundImage: `url(${elem.image})`,
+                        backgroundSize: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
+                      <div className="w-50 flex flex-col justify-between h-full">
+                        <div className="text-[#fff] text-[13px] font-medium m-5 font-dmsans">
+                          {elem.title}
+                        </div>
+                        <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
+                          <button
+                            className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] "
+                            onClick={() => {
+                              router.push("/NftDetails/" + elem.nftId);
+                            }}
+                          >
+                            Visit
+                          </button>
+                        </div>
+                      </div>
+                      {/* <div className="text-[#FFFFFF] font-dmsans mt-3">
+                        <img
+                          className="h-auto w-auto "
+                          src={elem.image}
+                          alt=""
+                        />
+                      </div> */}
+                    </div>
+                  );
+                })}
             </div>
             <div className="text-xl text-[#333333] font-dmsans font-semibold">
               My Portfolio
@@ -295,25 +291,30 @@ export default function IndexPage() {
                     return (
                       <div
                         key={ind}
-                        
                         className={
                           ind == 0 || ind == 1
                             ? " flex flex-row mt-7 justify-between h-fit "
                             : " flex flex-row  justify-between h-fit "
                         }
                       >
-                        <div className="text-[#FFFFFF] font-dmsans cursor-pointer " onClick={()=>{
-                          router.push("/NftDetails/"+elem.id)
-                        }}>
+                        <div
+                          className="text-[#FFFFFF] font-dmsans cursor-pointer "
+                          onClick={() => {
+                            router.push("/NftDetails/" + elem.id);
+                          }}
+                        >
                           <img
                             className="h-[110px] w-[190px] rounded-md "
                             src={(require = elem.image)}
                             alt=""
                           />
                         </div>
-                        <div className="text-[#333333] w-48 text-[14px] font-semibold m-5 font-dmsans cursor-pointer " onClick={()=>{
-                          router.push("/NftDetails/"+elem.id)
-                        }}>
+                        <div
+                          className="text-[#333333] w-48 text-[14px] font-semibold m-5 font-dmsans cursor-pointer "
+                          onClick={() => {
+                            router.push("/NftDetails/" + elem.id);
+                          }}
+                        >
                           {elem.name} <br />
                           {elem.price}
                           <br />
@@ -326,8 +327,13 @@ export default function IndexPage() {
                         </div>
 
                         <div className="text-[#000] font-dmsans">
-                          <button className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] " onClick={()=>{addWishlist(elem.id)}}>
-                            Add to watchlist
+                          <button
+                            className="w-36 h-auto p-2 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] "
+                            onClick={() => {
+                              addWishlist(elem.id);
+                            }}
+                          >
+                            Add to wishlist
                           </button>
                           <button className="w-36 h-auto p-2 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
                             Buy
@@ -343,35 +349,38 @@ export default function IndexPage() {
                   My Wishlist
                 </div>
                 <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
-                {wishlist &&
-                  wishlist.map((elem, ind) => {
-                    return (
-                      <li key={ind} className="pb-3 sm:pb-4">
-                      <div className="flex items-center space-x-4 cursor-pointer" onClick={()=>{
-                          router.push("/NftDetails/"+elem.id)
-                        }}>
-                        <div className="flex-shrink-0">
-                          <img
-                            className="w-8 h-8 rounded-full"
-                            src={(require = elem.image)}
-                            alt="Neil image"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            {elem.name}
-                          </p>
-                          <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                            {elem.category}
-                          </p>
-                        </div>
-                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                          {elem.price}
-                        </div>
-                      </div>
-                    </li>
-                    )})}
-                  
+                  {wishlist &&
+                    wishlist.map((elem, ind) => {
+                      return (
+                        <li key={ind} className="pb-3 sm:pb-4">
+                          <div
+                            className="flex items-center space-x-4 cursor-pointer"
+                            onClick={() => {
+                              router.push("/NftDetails/" + elem.id);
+                            }}
+                          >
+                            <div className="flex-shrink-0">
+                              <img
+                                className="w-8 h-8 rounded-full"
+                                src={(require = elem.image)}
+                                alt="Neil image"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {elem.name}
+                              </p>
+                              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {elem.category}
+                              </p>
+                            </div>
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              {elem.price}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
                 </ul>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const { useRouter } = require("next/router");
@@ -11,7 +12,7 @@ export default function Home() {
   const [topMovers, setTopMovers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
   useEffect(() => {
-   if(id) getData();
+    if (id) getData();
   }, [id]);
   async function addWishlist(nftId) {
     try {
@@ -57,7 +58,7 @@ export default function Home() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
-          id:elem.id,
+          id: elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -97,7 +98,7 @@ export default function Home() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
-          id:elem.id,
+          id: elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -137,8 +138,29 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
+                  <Image
+                    height="800"
+                    width="1000"
+                    src={"/assets/images/featured.png"}
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
+                <div className="w-50 flex flex-col justify-between h-full">
+                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
+                    JON Vs Hmg
+                  </div>
+                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
+                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
+                      Visit
+                    </button>
+                  </div>
+                </div>
+                <div className="text-[#FFFFFF] font-dmsans mt-3">
+                  <Image
+                    height="800"
+                    width="1000"
                     src="/assets/images/featured.png"
                     alt=""
                   />
@@ -156,8 +178,9 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
+                  <Image
+                    height="800"
+                    width="1000"
                     src="/assets/images/featured.png"
                     alt=""
                   />
@@ -175,27 +198,9 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
-                    src="/assets/images/featured.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-center h-auto rounded bg-white dark:bg-gray-800">
-                <div className="w-50 flex flex-col justify-between h-full">
-                  <div className="text-[#333333] text-[13px] font-medium m-5 font-dmsans">
-                    JON Vs Hmg
-                  </div>
-                  <div className="text-[#000] font-dmsans m-5 justify-center items-center flex">
-                    <button className="w-24 h-8 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                      Visit
-                    </button>
-                  </div>
-                </div>
-                <div className="text-[#FFFFFF] font-dmsans mt-3">
-                  <img
-                    className="h-auto w-auto "
+                  <Image
+                    height="800"
+                    width="1000"
                     src="/assets/images/featured.png"
                     alt=""
                   />
@@ -219,9 +224,11 @@ export default function Home() {
                         <li key={ind} className="py-2">
                           <div className="flex items-center  justify-evenly space-x-4">
                             <div className="">
-                              <img
+                              <Image
+                                height="80"
+                                width="100"
                                 className="w-8 h-8 rounded-full"
-                                src={(require = elem.image)}
+                                src={elem.image}
                                 alt="Neil image"
                               />
                             </div>
@@ -244,8 +251,7 @@ export default function Home() {
 
                             <svg
                               onClick={() => {
-
-                                 addWishlist(elem.id);
+                                addWishlist(elem.id);
                               }}
                               className="cursor-pointer"
                               width="16"
@@ -315,11 +321,10 @@ export default function Home() {
                               </div>
                             </div>
                             <svg
-                                 onClick={() => {
-
+                              onClick={() => {
                                 addWishlist(elem.id);
-                                }}
-                                className="cursor-pointer"
+                              }}
+                              className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -364,7 +369,9 @@ export default function Home() {
                   <li className="py-2">
                     <div className="flex items-center  justify-evenly space-x-4">
                       <div className="">
-                        <img
+                        <Image
+                          height="80"
+                          width="100"
                           className="w-8 h-8 rounded-full"
                           src="/assets/images/nft2.png"
                           alt="Neil image"

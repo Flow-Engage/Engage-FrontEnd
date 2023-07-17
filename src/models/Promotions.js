@@ -8,6 +8,7 @@ const PromotionsSchema = new Schema({
     startDate: String,
     endDate:String,    
     details:String,    
+    nftId:String
 });
 
-export const Promotions =  models?.Promotions || mongoose.model("Promotions", PromotionsSchema);
+export const Promotions =  models?.Promotion || mongoose.model("Promotion", PromotionsSchema);

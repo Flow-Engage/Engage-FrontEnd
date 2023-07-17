@@ -28,6 +28,10 @@ export default function IndexPage() {
   const [mostActiveNFT, setMostActiveNFT] = useState([]);
   const [mostActiveCategory, setMostActiveCategory] = useState([]);
 
+  useEffect(() => {
+    getData();
+  }, []);
+
   async function getData() {
     try {
       let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/viewMarketPlace", {
@@ -72,6 +76,7 @@ export default function IndexPage() {
           image: elem.NFTDetails4.ipfs,
         });
       });
+
       setMostActiveMarketPlace(mostap);
       setMostActiveNFT(mostan);
       setMostActiveCategory(mostac);

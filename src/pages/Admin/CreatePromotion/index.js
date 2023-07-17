@@ -1,6 +1,6 @@
 import Head from "@/components/Head";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
 import { create } from "ipfs-http-client";
@@ -30,10 +30,49 @@ export default function IndexPage() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [details, setDetails] = useState("");
+  const [nftId, setNftId] = useState("");
   const inputRef1 = useRef(null);
   const resetFileInput1 = (e) => {
     setIpfs("");
   };
+  const [nft, setNft] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+  async function getData() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/NftFromId/All",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+      let arr = [];
+      response.filter((elem) => {
+        arr.push({
+          id: elem.id,
+          name: elem.name,
+          image: elem.ipfs,
+          price: elem.price,
+          category: elem.marketPlaceCategory,
+          change: elem.change,
+        });
+      });
+      setNft(arr);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   async function getIpfsUrlFromImage() {
     const url = await UploadOnIPFS(ipfsFile);
 
@@ -53,21 +92,26 @@ export default function IndexPage() {
 
   async function saveData() {
     try {
-      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/addPromotion", {
-        method: "POST",
-        body: JSON.stringify({
-          ipfs,
-          title,
-          startDate,
-          endDate,
-          details,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((e) => {
+
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/addPromotion",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ipfs,
+            title,
+            startDate,
+            endDate,
+            details,
+            nftId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
         alert("Saved");
-         router.push("/Admin/Dashboard");
+        router.push("/Admin/Dashboard");
       });
     } catch (errorMessage) {
       console.error(errorMessage);
@@ -102,7 +146,7 @@ export default function IndexPage() {
                           htmlFor="email"
                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
-                          Upload Promotion Image
+                          Upload Promotion Image (283x148)
                         </label>
                         <input
                           type="file"
@@ -210,7 +254,33 @@ export default function IndexPage() {
                           onChange={(v) => setTitle(v.target.value)}
                           required
                         />
-                      </div> 
+                      </div>
+                      <div className="mb-6">
+                        <label
+                          htmlFor="email"
+                          className="block mb-2 text-[16px] line-[24px] font-medium text-gray-900 dark:text-white"
+                        >
+                          Mapped NFT
+                        </label>
+                        <select
+                          type="select"
+                          id="select"
+                          className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Choose Market Category"
+                          onChange={(v) => setNftId(v.target.value)}
+                          value={nftId}
+                        >
+                          {nft &&
+                            nft.map((elem, ind) => {
+                              return (
+                                <option key={ind} value={elem.id}>
+                                  {elem.name}
+                                </option>
+                              );
+                            })}
+                        </select>
+
+                      </div>
                       <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal  ">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <div className="mb-6 ">
@@ -310,6 +380,7 @@ export default function IndexPage() {
         </div>
       </div>
     );
+  } else {
+    return window.open("/", "_self");
   }
-  else{return window.open("/", "_self");}
 }

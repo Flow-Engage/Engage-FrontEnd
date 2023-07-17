@@ -1,6 +1,7 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 export default function IndexPage() {
@@ -54,7 +55,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
-          id:elem.id,
+          id: elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -94,7 +95,7 @@ export default function IndexPage() {
       let Top = [];
       response.filter((elem) => {
         Top.push({
-          id:elem.id,
+          id: elem.id,
           name: elem.name,
           image: elem.ipfs,
           price: elem.price,
@@ -193,7 +194,9 @@ export default function IndexPage() {
                         <li key={ind} className="py-2">
                           <div className="flex items-center  justify-evenly space-x-4">
                             <div className="">
-                              <img
+                              <Image
+                                height="80"
+                                width="100"
                                 className="w-8 h-8 rounded-full"
                                 src={(require = elem.image)}
                                 alt="Neil image"
@@ -216,10 +219,10 @@ export default function IndexPage() {
                               </div>
                             </div>
                             <svg
-                                 onClick={() => {
-                                  addWishlist(elem.id);
-                                }}
-                                className="cursor-pointer"
+                              onClick={() => {
+                                addWishlist(elem.id);
+                              }}
+                              className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -267,7 +270,9 @@ export default function IndexPage() {
                         <li key={ind} className="py-2">
                           <div className="flex items-center  justify-evenly space-x-4">
                             <div className="">
-                              <img
+                              <Image
+                                height="80"
+                                width="100"
                                 className="w-8 h-8 rounded-full"
                                 src={(require = elem.image)}
                                 alt="Neil image"
@@ -290,10 +295,10 @@ export default function IndexPage() {
                               </div>
                             </div>
                             <svg
-                                 onClick={() => {
-                                  addWishlist(elem.id);
-                                }}
-                                className="cursor-pointer"
+                              onClick={() => {
+                                addWishlist(elem.id);
+                              }}
+                              className="cursor-pointer"
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"

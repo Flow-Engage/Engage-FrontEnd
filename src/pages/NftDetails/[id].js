@@ -107,7 +107,7 @@ export default function NftDetails() {
                       </div>
                       <div className="text-[#000] font-dmsans">
                         <button className="w-full text-[10px] h-auto p-3 m-2 rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                          Add to watchlist
+                          Add to wishlist
                         </button>
                         <button className="w-full text-[10px] h-auto p-3 m-2 my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
                           Buy
@@ -168,7 +168,7 @@ export default function NftDetails() {
                                 </div>
                                 <div className="text-[#000] font-dmsans flex items-center justify-evenly w-auto flex-col">
                                   <button className="w-24 h-auto text-[10px] p-2  rounded-lg bg-[#F2F2F2] text-[#0654D6] ">
-                                    Add to watchlist
+                                    Add to wishlist
                                   </button>
                                   <button className="w-24 h-auto text-[10px] p-2  my-0 rounded-lg bg-[#0654D6] text-[#FFF] ">
                                     Buy

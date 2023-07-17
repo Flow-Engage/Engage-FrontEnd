@@ -1,10 +1,61 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { Box, Tab } from "@mui/material";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 export default function IndexPage() {
   const { data, status } = useSession();
+  const [tabValue1, setTabValue1] = useState("1");
+  const [wishlist, setWishlist] = useState([]);
+  const router = useRouter();
+  const handleChange1 = (event, newValue) => {
+    setTabValue1(newValue);
+  };
+  useEffect(() => {
+    if (data) getWishlist();
+  }, [data]);
+  async function getWishlist() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/viewWishlist/" +
+          data.user.email,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
 
+      let Top = [];
+      response.filter((elem) => {
+        Top.push({
+          id: elem.id,
+          name: elem.name,
+          image: elem.ipfs,
+          price: elem.price,
+          category: elem.marketPlaceCategory,
+          change: elem.change,
+        });
+      });
+
+      setWishlist(Top);
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
   if (status === "loading") return <h1> loading... please wait</h1>;
   if (status === "authenticated") {
     return (
@@ -86,13 +137,125 @@ export default function IndexPage() {
             <div className="grid grid-cols-1 gap-4 mb-4 mt-3">
               <div className="rounded bg-white h-auto p-5 dark:bg-gray-800">
                 <div className="flex flex-row justify-between items-center px-2">
-                  <div className="text-base text-[#333333] font-dmsans font-light w-[35%] flex flex-row items-center justify-evenly">
-                    <span> My Collection</span>
-                    <span> Collected</span>
-                    <span> Watchlist</span>
-                    <span> Collected</span>
-                  </div>
-                  <div className="text-sm text-[#999999] flex flex-row items-center font-dmsans font-light cursor-pointer">
+                  <Box sx={{ width: "100%", typography: "body1" }} className="">
+                    <TabContext value={tabValue1}>
+                      <Box
+                        sx={{
+                          borderBottom: 1,
+                          borderColor: "divider",
+                        }}
+                      >
+                        <TabList
+                          onChange={handleChange1}
+                          aria-label="lab API tabs example"
+                        >
+                          <Tab label="My Collection" value="1" />
+                          <Tab label="wishlist" value="2" />
+                        </TabList>
+                      </Box>
+                      <TabPanel className="p-0" value="1">
+                        <div className="px-2 flex flex-row   divide-y mt-10 divide-gray-200 dark:divide-gray-700">
+                          <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <a href="#">
+                              <img
+                                className="rounded-t-lg h-60 w-full"
+                                src="/assets/images/nft1.png"
+                                alt=""
+                              />
+                            </a>
+                            <div className="p-5">
+                              <a href="#">
+                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                  Lorem ipsum dolor sit amet consectetur.
+                                </h5>
+                              </a>
+                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                80 USDT
+                              </p>
+                            </div>
+                          </div>
+                          <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <a href="#">
+                              <img
+                                className="rounded-t-lg h-60 w-full"
+                                src="/assets/images/nft2.png"
+                                alt=""
+                              />
+                            </a>
+                            <div className="p-5">
+                              <a href="#">
+                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                  Lorem ipsum dolor sit amet consectetur.
+                                </h5>
+                              </a>
+                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                80 USDT
+                              </p>
+                            </div>
+                          </div>
+                          <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <a href="#">
+                              <img
+                                className="rounded-t-lg h-60 w-full"
+                                src="/assets/images/nft1.png"
+                                alt=""
+                              />
+                            </a>
+                            <div className="p-5">
+                              <a href="#">
+                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                  Lorem ipsum dolor sit amet consectetur.
+                                </h5>
+                              </a>
+                              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                80 USDT
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </TabPanel>
+                      <TabPanel className="p-0" value="2">
+                      <ul className="max-w-md divide-y mt-5 divide-gray-200 dark:divide-gray-700">
+                  {wishlist &&
+                    wishlist.map((elem, ind) => {
+                      return (
+                        <li key={ind} className="pb-3 sm:pb-4">
+                          <div
+                            className="flex items-center space-x-4 cursor-pointer"
+                            onClick={() => {
+                              router.push("/NftDetails/" + elem.id);
+                            }}
+                          >
+                            <div className="flex-shrink-0">
+                              <Image
+                                height={"100"}
+                                width="100"
+                                className="w-8 h-8 rounded-full"
+                                src={(require = elem.image)}
+                                alt="Neil image"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {elem.name}
+                              </p>
+                              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {elem.category}
+                              </p>
+                            </div>
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              {elem.price}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                </ul>
+                      </TabPanel>
+                    </TabContext>
+                  </Box>
+
+                  {/* <div className="text-sm text-[#999999] w-52 flex flex-row items-center font-dmsans font-light cursor-pointer">
                     <svg
                       width="24"
                       height="24"
@@ -106,66 +269,7 @@ export default function IndexPage() {
                       />
                     </svg>
                     Add Collection
-                  </div>
-                </div>
-                <div className="px-2 flex flex-row   divide-y mt-10 divide-gray-200 dark:divide-gray-700">
-                  <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                      <img
-                        className="rounded-t-lg h-60 w-full"
-                        src="/assets/images/nft1.png"
-                        alt=""
-                      />
-                    </a>
-                    <div className="p-5">
-                      <a href="#">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                          Lorem ipsum dolor sit amet consectetur.
-                        </h5>
-                      </a>
-                      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        80 USDT
-                      </p>
-                    </div>
-                  </div>
-                  <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                      <img
-                        className="rounded-t-lg h-60 w-full"
-                        src="/assets/images/nft2.png"
-                        alt=""
-                      />
-                    </a>
-                    <div className="p-5">
-                      <a href="#">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                          Lorem ipsum dolor sit amet consectetur.
-                        </h5>
-                      </a>
-                      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        80 USDT
-                      </p>
-                    </div>
-                  </div>
-                  <div className="w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                      <img
-                        className="rounded-t-lg h-60 w-full"
-                        src="/assets/images/nft1.png"
-                        alt=""
-                      />
-                    </a>
-                    <div className="p-5">
-                      <a href="#">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                          Lorem ipsum dolor sit amet consectetur.
-                        </h5>
-                      </a>
-                      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        80 USDT
-                      </p>
-                    </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -174,5 +278,4 @@ export default function IndexPage() {
       </div>
     );
   }
-   
 }

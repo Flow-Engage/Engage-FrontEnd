@@ -1,11 +1,12 @@
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Head({ name, img }) {
   const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   function openNotificationDrawer() {
     alert("Noti");
@@ -53,11 +54,11 @@ export default function Head({ name, img }) {
             <div className=" w-11/12 flex flex-row items-center justify-center">
               <div
                 className="cursor-pointer w-auto contents"
-
-                onMouseEnter={()=>setIsProfileDrawerOpen(true)}
-
+                onMouseEnter={() => setIsProfileDrawerOpen(true)}
               >
-                <img
+                <Image
+                  height="800"
+                  width="100"
                   className="h-10 w-10 rounded-full mr-4 ml-10"
                   src={img}
                   alt={name + " photo"}
@@ -82,7 +83,7 @@ export default function Head({ name, img }) {
                     <ul
                       className="py-2 text-gray-700 dark:text-gray-200"
                       aria-labelledby="dropdownDefaultButton"
-                      onMouseLeave={()=>setIsProfileDrawerOpen(false)}
+                      onMouseLeave={() => setIsProfileDrawerOpen(false)}
                     >
                       <li>
                         <Link
@@ -152,9 +153,12 @@ export default function Head({ name, img }) {
                             />
                           </svg>
 
-                          <span className="pl-2  font-normal leading-5 font-dmsans text-[#333333]" onClick={()=>{
-                            signOut()
-                          }}>
+                          <span
+                            className="pl-2  font-normal leading-5 font-dmsans text-[#333333]"
+                            onClick={() => {
+                              signOut();
+                            }}
+                          >
                             Logout
                           </span>
                         </a>

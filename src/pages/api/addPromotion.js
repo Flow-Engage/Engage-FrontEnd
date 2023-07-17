@@ -11,9 +11,11 @@ export default async (req, res) => {
         startDate,
         endDate,
         details,
+        nftId
     } = req.body;
-    await connectMongo().catch((err) => console.log(err));
+console.log(nftId)
     let post = await Promotions.create({
+      nftId,
       ipfs,
       title,
       startDate,
