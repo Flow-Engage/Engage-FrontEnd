@@ -297,6 +297,7 @@ export default function IndexPage() {
                             <option value="Politics">Politics</option>
                             <option value="Golf">Golf</option>
                             <option value="Music">Music</option>
+                            <option value="Freedom Party">Freedom Party</option>
                           </select>
                         </div>
                         <div className="text-[#333333] text-[13px] flex flex-row justify-between font-normal  ">
@@ -559,6 +560,7 @@ export default function IndexPage() {
                                       <img src={NFTDetails1.url} />
                                     </div>
                                   )}
+                                  {/* {NFTDetails1.ipfs && (NFTDetails1.ipfs)} */}
                                 </TabPanel>
                                 <TabPanel value="2">
                                   <Box

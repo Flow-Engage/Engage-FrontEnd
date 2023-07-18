@@ -20,28 +20,30 @@ export default async (req, res) => {
     } = req.body;
     await connectMongo().catch((err) => console.log(err));
 
-    let nftDetailsLen = NftDetails.find({}).length + 1;
+    let nftDetailsLen = await NftDetails.find({});
+    let len = nftDetailsLen.length
 
    let details=  await NftDetails.create([
       {
-        id: nftDetailsLen,
+        id: len,
         marketPlaceName: marketPlaceName,
         marketPlaceCategory: marketPlaceCategory,
         name: NFTDetails1.name,
         price: NFTDetails1.price,
-        change: Math.floor(Math.random() * 70) + 1,
+        change: 0,
         ipfs: NFTDetails1.ipfs,
       },
       {
-        id: nftDetailsLen + 1,
+        id: len + 1,
         marketPlaceName: marketPlaceName,
         marketPlaceCategory: marketPlaceCategory,
         name: NFTDetails2.name,
         price: NFTDetails2.price,
-        change: Math.floor(Math.random() * 70) + 1,
+        change: 0,
         ipfs: NFTDetails2.ipfs,
       },
     ]);
+    console.log(details)
     let post = await Marketplaces.create({
       marketPlaceName,
       marketPlaceCategory,
@@ -50,6 +52,8 @@ export default async (req, res) => {
       maxNFTPUser,
       initialPrice,
       adminCommision, 
+      NFTDetails1,
+      NFTDetails2
     }).then((resp) => {
       console.log(resp);
       console.log("New User Added");

@@ -14,7 +14,7 @@ export default function NftDetails() {
   const { id } = router.query;
   useEffect(() => {
     if (id && data) getData();
-  }, [id,data]);
+  }, [id, data]);
   async function getData() {
     try {
       let response = await fetch(
@@ -192,12 +192,36 @@ export default function NftDetails() {
                         alt=""
                       />
                     </div>
+
                     <div className="text-[#333333]  text-[24px] font-medium m-5 font-dmsans">
                       {nft.name} <br />
                       {nft.price}
                       <div className="w-full text-[16px] h-auto m-2  flex flex-row ">
                         Today{" "}
                         <div className="text-[#EA0606] ml-5">{nft.change}%</div>
+                      </div>
+                      <div
+                        class="flex cursor-pointer "
+                        onClick={() => {
+                          if (nft.name === "NJ Primary - Joe Lincoln") {
+                            window.open(
+                              "https://infura-ipfs.io/ipfs/QmZyFeTunhUrybvYHvie5SoRejVB4how2tLcYHdomiiuCE"
+                            );
+                          } else if (nft.name === "NJ Primary - Fred Kennedy") {
+                            window.open(
+                              "https://infura-ipfs.io/ipfs/QmasyC8JZD3LWksasSkBViX1NJgNb2U2phkvYXK4eEW1nk"
+                            );
+                          }
+                        }}
+                      >
+                        <img
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAYAAADtc08vAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFxSURBVHgBlVNLUsJAEO3uJFUUKzyB3EC4AdwATiBsLdFYSlGw0g0UsFDAhTvICcgN5AZwA+MNsrIoyHQ7E0uLT8DibSbz8t7rmekZhAS06jdzAFkoWj9BlMoicQlRzju9UXlXi/vmWkXT46RgQbnTIS97Aa7rZlKOKulpjgQuNZuBZIQM4CHSjHG56HbfAjJsWptJV9WT2yNmg4zRoPCUlFMyRBwgLCGcCLLsj78AAPs//UIxF0FgrxA2Gm7WUjzfXLoAzhCk8Gv+WlMx7ayyIPb7hi5UtMoTsRpvmyHo9AdFBqmKgHfAbJAhdsaJK9Axk3Z/VDVfrfpVLsFsKoXKWuXjNjbvr0tINN3enUwA1CDRbP4ilzu9V5/gILCiD3d+qK2EjsTjjxazcCKEozMzxv1jy/IpigIhKhy9iXrfjOCZd7JcW35ce1fTfKi5iPic6EeodHpDb5PDJKF+UFMG/BRmH2w7IMWPiHDR7g/zu9pv1Q+X55Cb7lMAAAAASUVORK5CYII="
+                          alt="certified"
+                          class=" h-4 w-4 mt-1"
+                        />
+                        <p class="text-sm ml-3 mt-1 text-[#333333] font-dmsans font-medium">
+                          Certified
+                        </p>
                       </div>
                       <div className="text-[#000] font-dmsans">
                         <button

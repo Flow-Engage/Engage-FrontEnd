@@ -39,13 +39,13 @@ export default function IndexPage() {
         const formattedDate = date.toLocaleDateString("en-US", options);
 
         console.log(formattedDate); // Output: 8/7/2023
-
+        console.log(response)
         newa.push({
           name: (
             <div className="flex flex-row justify-center items-center">
               <img
                 className="h-10 w-10 rounded-full mr-1"
-                src={elem.NFTDetails1.ipfs}
+                src={elem.NFTDetails1?.ipfs}
                 alt=""
               />
               {elem.marketPlaceName}
@@ -54,7 +54,7 @@ export default function IndexPage() {
           category: elem.marketPlaceCategory,
           adminCommision: elem.adminCommision,
 
-          initialprice: elem.initialprice,
+          initialprice: elem.initialPrice,
           createdon: formattedDate,
         });
         setTableData(newa)

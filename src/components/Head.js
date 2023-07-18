@@ -13,13 +13,13 @@ export default function Head({ name, img }) {
   }
   return (
     <>
-      <header className="bg-[#FFFFFF] w-screen pl-60 p-4  items-center justify-between  ">
+      <header className="bg-[#FFFFFF] w-screen pl-60 p-4 z-0 items-center justify-between  ">
         <nav
           className=" flex  items-center justify-between  "
           aria-label="Global"
         >
           <div className="flex lg:flex-1 ml-64   items-center  ">
-            <a href="#" className="-m-1.5 p-1.5"></a>
+
 
             <form className="flex items-center  w-1/2 ml-6">
               <input
@@ -204,7 +204,9 @@ export default function Head({ name, img }) {
                       </li>
                       <li>
                         <a
-                          href="#"
+                          onClick={() => {
+                            signOut();
+                          }}
                           class=" px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex flex-row justify-start"
                         >
                           <svg
@@ -223,12 +225,7 @@ export default function Head({ name, img }) {
                             />
                           </svg>
 
-                          <span
-                            className="pl-2  font-normal leading-5 font-dmsans text-[#333333]"
-                            onClick={() => {
-                              signOut();
-                            }}
-                          >
+                          <span className="pl-2  font-normal leading-5 font-dmsans text-[#333333]">
                             Logout
                           </span>
                         </a>
