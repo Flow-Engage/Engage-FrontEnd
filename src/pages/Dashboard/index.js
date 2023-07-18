@@ -11,8 +11,10 @@ export default function IndexPage() {
   const [wishlist, setWishlist] = useState([]);
   const router = useRouter();
   useEffect(() => {
-    getData();
-    if (data) getWishlist();
+
+    if (data){
+      getData();
+       }
   }, [data]);
 
   const [promotions, setPromotions] = useState([]);
@@ -130,6 +132,7 @@ export default function IndexPage() {
 
       const topThreeMovers = Top.slice(0, 4);
       setTopMovers(topThreeMovers);
+      getWishlist()
     } catch (errorMessage) {
       console.error(errorMessage);
     }

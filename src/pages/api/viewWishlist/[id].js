@@ -11,7 +11,6 @@ export default async (req, res) => {
 
         return intArray;
       }
-      return resp;
     });
 
     let nftNames = await NftDetails.find({});

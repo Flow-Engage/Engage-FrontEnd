@@ -10,8 +10,8 @@ export default function IndexPage() {
   const router = useRouter();
 
   useState(()=>{
-    getPortfolio()
-  },[])
+    if(data)getPortfolio()
+  },[data])
   const [totalPortfolio, setTotalPortfolio] = useState("");
   async function getPortfolio() {
     try {

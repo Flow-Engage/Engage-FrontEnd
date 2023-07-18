@@ -13,8 +13,8 @@ export default function NftDetails() {
 
   const { id } = router.query;
   useEffect(() => {
-    if (id) getData();
-  }, [id]);
+    if (id && data) getData();
+  }, [id,data]);
   async function getData() {
     try {
       let response = await fetch(
