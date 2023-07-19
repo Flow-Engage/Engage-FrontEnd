@@ -31,6 +31,7 @@ export const authOptions = {
             console.log("New User Added");
           });
         } else console.log("old User");
+         
         return true;
       }
       return false;

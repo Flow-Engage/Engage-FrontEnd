@@ -13,12 +13,13 @@ export default function IndexPage() {
   const [wishlist, setWishlist] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
   const [totalPortfolio, setTotalPortfolio] = useState("");
+  const [userData, setUserData] = useState({});
   const router = useRouter();
   const handleChange1 = (event, newValue) => {
     setTabValue1(newValue);
   };
   useEffect(() => {
-    if (data) getWishlist();
+    if (data) getUserDetail()
   }, [data]);
   async function getWishlist() {
     try {
@@ -56,6 +57,38 @@ export default function IndexPage() {
 
       setWishlist(Top);
       getPortfolio();
+    } catch (errorMessage) {
+      console.error(errorMessage);
+    }
+  }
+  async function getUserDetail() {
+    try {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL +
+          "/api/getUserDetail",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: data.user.email,
+
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(function (response) {
+          // The response is a Response instance.
+          // You parse the data into a useable format using `.json()`
+          return response.json();
+        })
+        .then(function (data) {
+          return data;
+        });
+        setUserData(response)
+      
+
+      getWishlist();
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -150,7 +183,7 @@ export default function IndexPage() {
                           fill="#333333"
                         />
                       </svg>
-                      wbsc2.......83beh
+                    {userData && userData.walletAddress}
                     </div>
                     Joined June 2023
                   </div>
@@ -210,8 +243,11 @@ export default function IndexPage() {
                           {portfolio &&
                             portfolio.map((elem, ind) => {
                               return (
-                                <div key={ind} className="float-left w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                  <Link href={"/NftDetails/"+elem.id}>
+                                <div
+                                  key={ind}
+                                  className="float-left w-72 m-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                                >
+                                  <Link href={"/NftDetails/" + elem.id}>
                                     <img
                                       className="rounded-t-lg h-60 w-full"
                                       src={elem.image}
@@ -219,7 +255,7 @@ export default function IndexPage() {
                                     />
                                   </Link>
                                   <div className="p-5">
-                                  <Link href={"/NftDetails/"+elem.id}>
+                                    <Link href={"/NftDetails/" + elem.id}>
                                       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {elem.name}
                                       </h5>
@@ -231,8 +267,6 @@ export default function IndexPage() {
                                 </div>
                               );
                             })}
-                           
-                           
                         </div>
                       </TabPanel>
                       <TabPanel className="p-0" value="2">

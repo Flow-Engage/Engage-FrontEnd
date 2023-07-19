@@ -13,12 +13,21 @@ export default async (req, res) => {
       }
     });
 
-    let nftNames = await NftDetails.find({});
-    const result = nftNames.filter((obj) =>
-      topThree.includes(parseInt(obj.id))
-    );
+    if (topThree) {
+      let nftNames = await NftDetails.find({});
 
-    return res.json(result);
+      if (nftNames) {
+        const result = nftNames.filter((obj) =>
+          topThree.includes(parseInt(obj.id))
+        );
+
+        return res.json(result);
+      } else {
+        return res.json([]);
+      }
+    } else {
+      return res.json([]);
+    }
   } catch (e) {
     console.error(e);
     throw new Error(e).message;
