@@ -25,7 +25,7 @@ export const authOptions = {
             email: user.email,
             registeredOn: new Date(),
             isAdmin: false,
-            walletAddress:address
+            walletAddress:address.address
           }).then((resp) => {
             console.log(resp);
             console.log("New User Added");
