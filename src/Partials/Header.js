@@ -1,6 +1,7 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { getNftMetadata, getOwnedNFTs, getPlatformData } from "@/flow/actions";
 
 function Header() {
   const [top, setTop] = useState(true);
@@ -38,12 +39,12 @@ function Header() {
           <nav className="flex flex-grow">
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
-                <button onClick={()=>signIn("google")}
+                <button
+                  onClick={() => getOwnedNFTs() /* signIn("google") */}
                   className="bg-[#0654D6]   hover:bg-blue-700 text-white font-extralight py-2 px-4 rounded-lg flex flex-row justify-between items-center"
                   style={{ fontFamily: "Inter" }}
-
                 >
-                  Log In / Register 
+                  Log In / Register
                 </button>
               </li>
             </ul>
