@@ -1,6 +1,7 @@
 import Head from "@/components/Head";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import Sipnner from "@/components/Spinner";
 import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
 import axios from "axios";
@@ -46,6 +47,7 @@ export default function IndexPage() {
   const [adminComm, setAdminComm] = useState("");
 
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
 
   const resetFileInput1 = (e) => {
     // 👇️ reset input value
@@ -161,23 +163,26 @@ export default function IndexPage() {
 
   async function saveData() {
     try {
-      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/addMarketPlace", {
-        method: "POST",
-        body: JSON.stringify({
-          marketPlaceName: marketPlaceName,
-          marketPlaceCategory: marketPlaceCategory,
-          marketPlaceReleaseDateTime: marketPlaceStartDT,
-          NFTQuantity: NFTQuantity,
-          maxNFTPUser: maxNFTPUser,
-          initialPrice: initialPrice,
-          adminCommision: adminComm,
-          NFTDetails1: NFTDetails1,
-          NFTDetails2: NFTDetails2,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((e) => {
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/addMarketPlace",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            marketPlaceName: marketPlaceName,
+            marketPlaceCategory: marketPlaceCategory,
+            marketPlaceReleaseDateTime: marketPlaceStartDT,
+            NFTQuantity: NFTQuantity,
+            maxNFTPUser: maxNFTPUser,
+            initialPrice: initialPrice,
+            adminCommision: adminComm,
+            NFTDetails1: NFTDetails1,
+            NFTDetails2: NFTDetails2,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((e) => {
         alert("Saved");
         router.push("/Admin/ViewMarketPlace");
       });
@@ -189,7 +194,11 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
+        <HeadAdmin
+          name={data.user.name}
+          img={data.user.image}
+          signOut={signOut}
+        />
         <AdminSidebar active={"AddMarketplace"} />
 
         <div className="p-4 pt-0 sm:ml-64 ">
@@ -727,6 +736,27 @@ export default function IndexPage() {
                           </div>
                         </div>
                       </div>
+                      <div className="text-lg text-[#333333] mt-2   font-normal">
+                        <div className="">
+                          <label
+                            htmlFor="email"
+                            className="block mb-2 text-[16px] line-[24px] font-medium text-gray-900 dark:text-white"
+                          >
+                            Description
+                          </label>
+                          <input
+                            type="email"
+                            onChange={(e) => {
+                              let description = e.target.value;
+                              NFTDetails1.description = name;
+                              setNFTDetails1({ ...NFTDetails1, description });
+                            }}
+                            className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder=""
+                            required
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
@@ -1008,7 +1038,29 @@ export default function IndexPage() {
                             />
                           </div>
                         </div>
+                        
                       </div>
+                      <div className="text-lg text-[#333333] mt-2   font-normal">
+                          <div className="">
+                            <label
+                              htmlFor="email"
+                              className="block mb-2 text-[16px] line-[24px] font-medium text-gray-900 dark:text-white"
+                            >
+                              Description
+                            </label>
+                            <input
+                              type="email"
+                              onChange={(e) => {
+                                let description = e.target.value;
+                                NFTDetails2.description = name;
+                                setNFTDetails2({ ...NFTDetails2, description });
+                              }}
+                              className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                              placeholder=""
+                              required
+                            />
+                          </div>
+                        </div>
                     </div>
                   </div>
                   <div className="rounded bg-white h-auto p-1 cursor-pointer mt-3 text-[#0654D6] flex flex-row justify-center">
@@ -1041,6 +1093,7 @@ export default function IndexPage() {
         </div>
       </div>
     );
+  } else {
+    return window.open("/", "_self");
   }
-  else{return window.open("/", "_self");}
 }

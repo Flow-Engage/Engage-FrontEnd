@@ -1,6 +1,7 @@
 import Head from "@/components/Head";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import Sipnner from "@/components/Spinner";
 import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
 import { create } from "ipfs-http-client";
@@ -25,6 +26,7 @@ export default function IndexPage() {
   const { data, status } = useSession();
   const [descriptionVisible, setdescriptionVisible] = useState(true);
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
   const [ipfs, setIpfs] = useState("");
   const [ipfsFile, setIpfsFile] = useState("");
   const [title, setTitle] = useState("");

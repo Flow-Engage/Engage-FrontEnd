@@ -10,6 +10,7 @@ const NftDetailsSchema = new Schema({
   price: String,
   change: String,
   ipfs: String,
+  description:String
 });
 
 export const NftDetails = models.nftdetails || mongoose.model("nftdetails", NftDetailsSchema);

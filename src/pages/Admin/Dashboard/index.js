@@ -17,6 +17,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState } from "react";
+import Sipnner from "@/components/Spinner";
 import HeadAdmin from "@/components/HeadAdmin";
 
 export default function IndexPage() {
@@ -24,6 +25,7 @@ export default function IndexPage() {
   useEffect(() => {
     getData();
   }, []);
+  const [spinnerVisible, setSpinnerVisible] = useState(true);
 
   const [mostActiveMarketPlace, setMostActiveMarketPlace] = useState([]);
   const [mostActiveNFT, setMostActiveNFT] = useState([]);
@@ -67,20 +69,21 @@ export default function IndexPage() {
           price:  elem.initialprice,
         });
         mostan.push({
-          name: elem.NFTDetails3.name,
-          price: elem.NFTDetails3.price,
-          image: elem.NFTDetails3.ipfs,
+          name: elem.NFTDetails1.name,
+          price: elem.NFTDetails1.price,
+          image: elem.NFTDetails1.ipfs,
         });
         mostac.push({
           name: elem.marketPlaceCategory,
-          price: elem.NFTDetails4.price,
-          image: elem.NFTDetails4.ipfs,
+          price: elem.NFTDetails2.price,
+          image: elem.NFTDetails2.ipfs,
         });
       });
 
       setMostActiveMarketPlace(mostap);
       setMostActiveNFT(mostan);
       setMostActiveCategory(mostac);
+      setSpinnerVisible(false)
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -156,6 +159,8 @@ export default function IndexPage() {
       <div>
         <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
         <AdminSidebar active={"Dashboard"} />
+        <Sipnner visible={spinnerVisible}/>
+
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="text-xl text-[#333333] font-dmsans font-medium">

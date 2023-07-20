@@ -1,6 +1,7 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import Sipnner from "@/components/Spinner";
 
 function Header() {
   const [top, setTop] = useState(true);

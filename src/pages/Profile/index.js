@@ -2,12 +2,14 @@ import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
+import Sipnner from "@/components/Spinner";
 import { useRouter } from 'next/router';
 
 export default function IndexPage() {
   const { data, status } = useSession();
   const [profileVisible, setProfileVisible] = useState(true);
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
 
   useState(()=>{
     if(data)getPortfolio()
@@ -66,7 +68,9 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+         
+        <Sipnner visible={spinnerVisible}/>
+<Head name={data.user.name} img={data.user.image} signOut={signOut} />
 {        totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
 
         <div className="p-4 pt-0 sm:ml-64 ">

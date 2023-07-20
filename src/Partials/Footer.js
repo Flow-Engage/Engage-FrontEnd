@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Sipnner from "@/components/Spinner";
 
 function Footer() {
   return (

@@ -2,6 +2,7 @@ import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Sipnner from "@/components/Spinner";
 import { useRouter } from "next/router";
 
 export default function NftDetails() {
@@ -10,6 +11,7 @@ export default function NftDetails() {
   const [similar, setSimilar] = useState([]);
   const [totalPortfolio, setTotalPortfolio] = useState("");
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
 
   const { id } = router.query;
   useEffect(() => {
@@ -156,7 +158,9 @@ export default function NftDetails() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+         
+        <Sipnner visible={spinnerVisible}/>
+<Head name={data.user.name} img={data.user.image} signOut={signOut} />
         {totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
 
         <div className="p-0 pt-0 sm:ml-64 ">

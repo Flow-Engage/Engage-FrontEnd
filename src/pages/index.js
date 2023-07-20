@@ -18,6 +18,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 //   );
 // }
 import React from "react";
+import Sipnner from "@/components/Spinner";
 
 import Header from "@/Partials/Header";
 import HeroHome from "@/Partials/HeroHome";

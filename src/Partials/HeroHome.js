@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Sipnner from "@/components/Spinner";
 // import Modal from '../utils/Modal';
 
 function HeroHome() {

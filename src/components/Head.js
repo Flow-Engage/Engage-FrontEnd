@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Sipnner from "@/components/Spinner";
 
 export default function Head({ name, img }) {
   const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
 
   function openNotificationDrawer() {
     alert("Noti");

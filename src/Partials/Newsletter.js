@@ -1,4 +1,5 @@
 import React from "react";
+import Sipnner from "@/components/Spinner";
 
 function Newsletter() {
   return (

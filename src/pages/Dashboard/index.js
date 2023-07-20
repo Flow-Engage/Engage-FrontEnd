@@ -1,20 +1,23 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
+import Sipnner from "@/components/Spinner";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
 export default function IndexPage() {
   const { data, status } = useSession();
   const [marketPlaceCategoryList, setMarketPlaceCategoryList] = useState([]);
   const [topMovers, setTopMovers] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const [spinnerVisible, setSpinnerVisible] = useState(true);
   const router = useRouter();
-  useEffect(() => {
 
-    if (data){
+  useEffect(() => {
+    if (data) {
       getData();
-       }
+    }
   }, [data]);
 
   const [promotions, setPromotions] = useState([]);
@@ -132,7 +135,7 @@ export default function IndexPage() {
 
       const topThreeMovers = Top.slice(0, 4);
       setTopMovers(topThreeMovers);
-      getWishlist()
+      getWishlist();
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -220,6 +223,7 @@ export default function IndexPage() {
       }
       setTotalPortfolio(portfolioVal + ":" + change);
       setPortfolio(arr);
+      setSpinnerVisible(false);
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -228,11 +232,11 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
+        <Sipnner visible={spinnerVisible} />
+
         <Head name={data.user.name} img={data.user.image} signOut={signOut} />
         {console.log(data)}
-        {totalPortfolio && (
-          <SideBar totalPortfolio={totalPortfolio} />
-        )}
+        {totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div className="text-xl text-[#333333] font-dmsans font-semibold">
@@ -287,7 +291,10 @@ export default function IndexPage() {
                   return (
                     <div
                       key={ind}
-                      className="flex items-center justify-around h-18 p-5 px-0 rounded bg-white dark:bg-gray-800 cursor-pointer" onClick={()=>{router.push("/NftDetails/"+elem.id)}}
+                      className="flex items-center justify-around h-18 p-5 px-0 rounded bg-white dark:bg-gray-800 cursor-pointer"
+                      onClick={() => {
+                        router.push("/NftDetails/" + elem.id);
+                      }}
                     >
                       <div className="text-[#FFFFFF] font-dmsans justify-between items-center flex flex-row">
                         <Image

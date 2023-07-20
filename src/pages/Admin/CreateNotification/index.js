@@ -1,6 +1,7 @@
 import Head from "@/components/Head";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
+import Sipnner from "@/components/Spinner";
 import { useRouter } from "next/router";
 import AdminSidebar from "@/components/AdminSidebar";
 import HeadAdmin from "@/components/HeadAdmin";
@@ -11,6 +12,7 @@ export default function IndexPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
   async function saveData() {
     try {
       let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/addNotifications", {

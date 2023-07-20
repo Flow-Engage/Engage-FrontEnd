@@ -4,12 +4,14 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Sipnner from "@/components/Spinner";
 export default function IndexPage() {
   const { data, status } = useSession();
   const [topMovers, setTopMovers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
   const [totalPortfolio, setTotalPortfolio] = useState("");
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
   useEffect(() => {
     getData();
   }, []);
@@ -180,7 +182,7 @@ export default function IndexPage() {
         change += parseInt(response.map[Nftarr[i]].details.change);
       }
       setTotalPortfolio(portfolioVal + ":" + change);
-
+      setSpinnerVisible(false)
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -189,7 +191,9 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+         
+        <Sipnner visible={spinnerVisible}/>
+<Head name={data.user.name} img={data.user.image} signOut={signOut} />
         {totalPortfolio && (
           <SideBar totalPortfolio={totalPortfolio} />
         )}

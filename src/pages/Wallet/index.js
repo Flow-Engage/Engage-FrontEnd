@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Sipnner from "@/components/Spinner";
 export default function IndexPage() {
   const { data, status } = useSession();
   const [tabValue1, setTabValue1] = useState("1");
@@ -15,6 +16,7 @@ export default function IndexPage() {
   const [totalPortfolio, setTotalPortfolio] = useState("");
   const [userData, setUserData] = useState({});
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
   const handleChange1 = (event, newValue) => {
     setTabValue1(newValue);
   };
@@ -137,6 +139,7 @@ export default function IndexPage() {
       }
       setTotalPortfolio(portfolioVal + ":" + change);
       setPortfolio(arr);
+      setSpinnerVisible(false)
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -145,7 +148,9 @@ export default function IndexPage() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+         
+        <Sipnner visible={spinnerVisible}/>
+<Head name={data.user.name} img={data.user.image} signOut={signOut} />
         {totalPortfolio && <SideBar totalPortfolio={totalPortfolio} />}
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-gray-200 border-dashed rounded-lg dark:border-gray-700">

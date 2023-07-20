@@ -1,13 +1,16 @@
 import Head from "@/components/Head";
 import SideBar from "@/components/SideBar";
+
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Sipnner from "@/components/Spinner";
 
 const { useRouter } = require("next/router");
 
 export default function Home() {
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
   const { id } = router.query;
   const [topMovers, setTopMovers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
@@ -158,7 +161,7 @@ export default function Home() {
         change += parseInt(response.map[Nftarr[i]].details.change);
       }
       setTotalPortfolio(portfolioVal + ":" + change);
-
+      setSpinnerVisible(false)
     } catch (errorMessage) {
       console.error(errorMessage);
     }
@@ -192,7 +195,9 @@ export default function Home() {
   if (status === "authenticated") {
     return (
       <div>
-        <Head name={data.user.name} img={data.user.image} signOut={signOut} />
+         
+        <Sipnner visible={spinnerVisible}/>
+<Head name={data.user.name} img={data.user.image} signOut={signOut} />
         {totalPortfolio && (
           <SideBar totalPortfolio={totalPortfolio} />
         )}

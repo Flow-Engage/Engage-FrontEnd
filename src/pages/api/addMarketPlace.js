@@ -32,6 +32,7 @@ export default async (req, res) => {
         price: NFTDetails1.price,
         change: 0,
         ipfs: NFTDetails1.ipfs,
+        description:NFTDetails1.description
       },
       {
         id: len + 1,
@@ -41,6 +42,7 @@ export default async (req, res) => {
         price: NFTDetails2.price,
         change: 0,
         ipfs: NFTDetails2.ipfs,
+        description:NFTDetails2.description
       },
     ]);
     console.log(details)

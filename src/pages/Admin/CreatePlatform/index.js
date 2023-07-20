@@ -1,4 +1,3 @@
-import Head from "@/components/Head";
 import { useSession, signIn, signOut } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import Sipnner from "@/components/Spinner";
@@ -7,23 +6,28 @@ import AdminSidebar from "@/components/AdminSidebar";
 import DataTable, { createTheme } from "react-data-table-component";
 import { Button } from "flowbite-react";
 import HeadAdmin from "@/components/HeadAdmin";
+
 export default function IndexPage() {
   const { data, status } = useSession();
 
+  const [name, setName] = useState("");
   const router = useRouter();
 const [spinnerVisible, setSpinnerVisible] = useState(true);
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
   async function getData() {
     try {
-      let response = await fetch(process.env.NEXT_PUBLIC_ORIGIN_URL+"/api/viewMarketPlace", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      let response = await fetch(
+        process.env.NEXT_PUBLIC_ORIGIN_URL + "/api/viewMarketPlace",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then(function (response) {
           // The response is a Response instance.
           // You parse the data into a useable format using `.json()`
@@ -41,7 +45,7 @@ const [spinnerVisible, setSpinnerVisible] = useState(true);
         const formattedDate = date.toLocaleDateString("en-US", options);
 
         console.log(formattedDate); // Output: 8/7/2023
-        console.log(response)
+        console.log(response);
         newa.push({
           name: (
             <div className="flex flex-row justify-center items-center">
@@ -59,7 +63,7 @@ const [spinnerVisible, setSpinnerVisible] = useState(true);
           initialprice: elem.initialPrice,
           createdon: formattedDate,
         });
-        setTableData(newa)
+        setTableData(newa);
       });
     } catch (errorMessage) {
       console.error(errorMessage);
@@ -251,24 +255,7 @@ const [spinnerVisible, setSpinnerVisible] = useState(true);
       sortable: true,
       filterable: true,
     },
-    {
-      name: "Category",
-      selector: "category",
-      sortable: true,
-    },
-    {
-      name: "Admin Comm (%)",
-      selector: "adminCommision",
-      sortable: true,
-    },
-    {
-      name: "Initial Price",
-      selector: "initialprice",
-    },
-    {
-      name: "Created On",
-      selector: "createdon",
-    },
+     
   ];
 
   const [selectedRows, setSelectedRows] = React.useState([]);
@@ -310,31 +297,88 @@ const [spinnerVisible, setSpinnerVisible] = useState(true);
   if (status === "authenticated") {
     return (
       <div>
-        <HeadAdmin name={data.user.name} img={data.user.image} signOut={signOut} />
-        <AdminSidebar active={"ViewMarketplace"} />
+        <HeadAdmin
+          name={data.user.name}
+          img={data.user.image}
+          signOut={signOut}
+        />
+        <AdminSidebar active={"createPlatform"} />
 
         <div className="p-4 pt-0 sm:ml-64 ">
           <div className="p-4 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-[140vh]  overflow-y-hidden">
-            <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
-              <DataTable
-                columns={columns}
-                data={tableData}
-                selectableRows
-                filterable
-                highlightOnHover
-                theme="solarized"
-                customStyles={customStyles}
-                fixedHeader
-                fixedHeaderScrollHeight="75vh"
-                contextActions={contextActions}
-                onSelectedRowsChange={handleRowSelected}
-                clearSelectedRows={toggleCleared}
-              />
+            <div
+              className="text-2xl text-[#333333]  font-semibold cursor-pointer"
+              onClick={() => router.push("/Dashboard")}
+            >
+              Create Platform
+            </div>
+            <div className="grid grid-cols-4 gap-4 ">
+              <div className="grid grid-cols-1 rounded h-auto p-3 col-span-1 dark:bg-gray-800">
+                <div className="flex  flex-col w-72 items-center justify-start  "></div>
+              </div>
+
+              {/* //////////////////////////////////// */}
+              {/* description SECTION */}
+              {/* //////////////////////////////////// */}
+              <div className="grid rounded h-auto w-3/4 p-3 col-span-3 dark:bg-gray-800">
+                <div className="rounded bg-white h-auto p-5  dark:bg-gray-800">
+                  <div className="w-50 flex flex-col justify-between h-full p-2 pb-0">
+                    <div className="text-[#333333] text-[13px]   m-3 mt-0 ">
+                      <div className="mb-6">
+                        <label
+                          htmlFor="email"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Platform Name
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          onChange={(v) => setName(v.target.value)}
+                          value={name}
+                          className=" border placeholder:font-light border-gray-300 text-[#333333] text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Type here"
+                          required
+                        />
+                      </div>
+                      <div className="w-full flex flex-row justify-end mt-10">
+                        <button
+                          className="bg-[#0654D6]  w-44 hover:bg-blue-700 text-white font-extralight py-2 px-4 rounded"
+                          onClick={() => {
+                            saveData();
+                          }}
+                        >
+                          Create Platform
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 mt-10 border-2 bg-[#F5F7F9] border-dashed rounded-lg dark:border-gray-700 h-fit w-auto overflow-y-hidden">
+                  <div className="rounded bg-white h-auto p-5 mt-3 dark:bg-gray-800">
+                    <DataTable
+                      columns={columns}
+                      data={tableData}
+                      selectableRows
+                      filterable
+                      highlightOnHover
+                      theme="solarized"
+                      customStyles={customStyles}
+                      fixedHeader
+                      fixedHeaderScrollHeight="75vh"
+                      contextActions={contextActions}
+                      onSelectedRowsChange={handleRowSelected}
+                      clearSelectedRows={toggleCleared}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     );
+  } else {
+    return window.open("/", "_self");
   }
-  else{return window.open("/", "_self");}
 }

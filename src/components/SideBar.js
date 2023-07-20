@@ -2,10 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import bg from "public/assets/images/card_bg.png";
 import { useEffect, useState } from "react";
+import Sipnner from "@/components/Spinner";
 
 export default function SideBar({ totalPortfolio }) {
   const [marketPlaceCategoryList, setMarketPlaceCategoryList] = useState([]);
   const router = useRouter();
+const [spinnerVisible, setSpinnerVisible] = useState(true);
   useEffect(() => {
     getData();
   }, []);
