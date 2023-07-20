@@ -2,7 +2,12 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Sipnner from "@/components/Spinner";
-import { getNftMetadata, getOwnedNFTs, getPlatformData } from "@/flow/actions";
+import {
+  getNftMetadata,
+  getOwnedNFTs,
+  getPlatformData,
+  getAllPlatformsData,
+} from "@/flow/actions";
 
 function Header() {
   const [top, setTop] = useState(true);
@@ -41,7 +46,7 @@ function Header() {
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
                 <button
-                  onClick={() => getOwnedNFTs() /* signIn("google") */}
+                  onClick={() => getAllPlatformsData() /* signIn("google") */}
                   className="bg-[#0654D6]   hover:bg-blue-700 text-white font-extralight py-2 px-4 rounded-lg flex flex-row justify-between items-center"
                   style={{ fontFamily: "Inter" }}
                 >
