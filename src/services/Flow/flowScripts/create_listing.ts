@@ -7,7 +7,7 @@ export const create_listing = () => {
     import NonFungibleToken from 0x631e88ae7f1d7c20
     import FlowToken from 0x7e60df042a9c0868
     import NFTStorefrontV2 from 0x2d55b98eb200daef
-    import Engage from 0x1ad3c2a8a0bca093
+    import Engage_2 from 0x1ad3c2a8a0bca093
     
     pub fun getOrCreateStorefront(account: AuthAccount): &NFTStorefrontV2.Storefront {
       if let storefrontRef = account.borrow<&NFTStorefrontV2.Storefront>(from: NFTStorefrontV2.StorefrontStoragePath) {
@@ -28,24 +28,24 @@ export const create_listing = () => {
     transaction(saleItemID: UInt64, saleItemPrice: UFix64) {
     
       let flowReceiver: Capability<&FlowToken.Vault{FungibleToken.Receiver}>
-      let EngageProvider: Capability<&Engage.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>
+      let Engage_2Provider: Capability<&Engage_2.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>
       let storefront: &NFTStorefrontV2.Storefront
     
       prepare(account: AuthAccount) {
         // We need a provider capability, but one is not provided by default so we create one if needed.
-        let EngageCollectionProviderPrivatePath = /private/EngageCollectionProviderV14
+        let Engage_2CollectionProviderPrivatePath = /private/Engage_2CollectionProviderV14
     
         self.flowReceiver = account.getCapability<&FlowToken.Vault{FungibleToken.Receiver}>(/public/flowTokenReceiver)!
     
         assert(self.flowReceiver.borrow() != nil, message: "Missing or mis-typed FLOW receiver")
     
-        if !account.getCapability<&Engage.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(EngageCollectionProviderPrivatePath)!.check() {
-          account.link<&Engage.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(EngageCollectionProviderPrivatePath, target: Engage.CollectionStoragePath)
+        if !account.getCapability<&Engage_2.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(Engage_2CollectionProviderPrivatePath)!.check() {
+          account.link<&Engage_2.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(Engage_2CollectionProviderPrivatePath, target: Engage_2.CollectionStoragePath)
         }
     
-        self.EngageProvider = account.getCapability<&Engage.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(EngageCollectionProviderPrivatePath)!
+        self.Engage_2Provider = account.getCapability<&Engage_2.Collection{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(Engage_2CollectionProviderPrivatePath)!
     
-        assert(self.EngageProvider.borrow() != nil, message: "Missing or mis-typed Engage.Collection provider")
+        assert(self.Engage_2Provider.borrow() != nil, message: "Missing or mis-typed Engage_2.Collection provider")
     
         self.storefront = getOrCreateStorefront(account: account)
       }
@@ -57,8 +57,8 @@ export const create_listing = () => {
         )
     
         self.storefront.createListing(
-          nftProviderCapability: self.EngageProvider,
-          nftType: Type<@Engage.NFT>(),
+          nftProviderCapability: self.Engage_2Provider,
+          nftType: Type<@Engage_2.NFT>(),
           nftID: saleItemID,
           salePaymentVaultType: Type<@FlowToken.Vault>(),
           saleCuts: [saleCut],
