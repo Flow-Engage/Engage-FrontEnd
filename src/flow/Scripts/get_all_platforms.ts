@@ -2,16 +2,16 @@
 
 export const getAllPlarforms = () => {
     return `
-import Engage from 0x195942c932186412 
+import Engage_2 from 0x195942c932186412 
 
-pub fun main(): [Engage.QueryPlatformData] {
+pub fun main(): [Engage_2.QueryPlatformData] {
 
-    let allPlatform: [Engage.QueryPlatformData] = []
-    let currentId = Engage.nextPlatformID
+    let allPlatform: [Engage_2.QueryPlatformData] = []
+    let currentId = Engage_2.nextPlatformID
     var  i = 0 as UInt64
 
     while (i <= currentId) {
-        if let data = Engage.getPlatformData(_platformID: i){
+        if let data = Engage_2.getPlatformData(_platformID: i){
 
             allPlatform.append(data)
             i = i + 1 
